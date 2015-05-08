@@ -1,0 +1,11 @@
+.\objects\cap_buttons.o: Peripherals\Cap_buttons.c
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h
+.\objects\cap_buttons.o: C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h
+.\objects\cap_buttons.o: Peripherals\Cap_Buttons.h
+.\objects\cap_buttons.o: Peripherals\Display.h
+.\objects\cap_buttons.o: Peripherals\Queue.h
