@@ -69,3 +69,9 @@ void init_Uart(){
 void init_Bt_Controller(){
 	
 }
+
+void connect_Bluetooth(){
+    
+}
+
+

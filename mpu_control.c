@@ -167,19 +167,22 @@ void configure_AccelRange(accelRange range){
 	
 }
 
+mpu_data_s get_Data_Packet(){
+    
+}
 
 void display_Register(uint16_t reg, uint16_t value){
 	display_Int(reg);
 	display_Int(value);
 }
 
-/* MPU-9150 interrupt handler function */
+/* MPU-9150 external interrupt handler function */
 void EXTI9_5_IRQHandler(void){
 	uint16_t count;
 	uint16_t  interrupt;
 	mpu_readRegister(1, reg.int_status);		/* clear mpu status register */
 	while(queue_isEmpty(mpuRxQueue)){}
-	interrupt = deQueue(mpuRxQueue);				/* read status bits */
+	interrupt = deQueue(mpuRxQueue);		/* read status bits */
 		
 	mpu_readRegister(2, reg.fifo_count_h);
 	
@@ -188,7 +191,7 @@ void EXTI9_5_IRQHandler(void){
 	while(queue_isEmpty(mpuRxQueue)){}
 	count <<= 8; 	// shift to high byte
 	count = deQueue(mpuRxQueue);	// get lower byte
-	if(count > 0){	
+	if(count > 0){	// If new data available
 		mpu_readRegister(count, reg.fifo_r_w); // finally read all the data!
 	}
 }

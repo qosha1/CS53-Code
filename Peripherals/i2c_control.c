@@ -167,7 +167,7 @@ while(MPU_I2C->ISR & I2C_ISR_BUSY){}// wait for any previous transfer to complet
 	// configure actual i2c register
 	MPU_I2C->CR2 = tmpReg;
 	
-	/* Once configured, generate a repeatt start condition */
+	/* Once configured, generate a repeat start condition */
 	I2C_GenerateSTART(MPU_I2C, true);
 	
 }
@@ -200,13 +200,15 @@ void I2C1_EV_IRQHandler(void){
 		MPU_I2C->ICR |= I2C_ICR_STOPCF; //clear flag
 	}
 	if(!(MPU_I2C->CR2 & I2C_CR2_RD_WRN)){ /* either read OR write */
-		if(interrupt & I2C_ISR_TC){// transfer complete
-			//I2C2->CR2 |= I2C_CR2_STOP; // stop the I2c 
-		}else if(interrupt & I2C_ISR_TXE){
-			// TX empty, send next byte
-			MPU_I2C->TXDR = (uint8_t) deQueue(mpuTxQueue);
-		}
+            /* Writing */
+            if(interrupt & I2C_ISR_TC){// transfer complete
+		//I2C2->CR2 |= I2C_CR2_STOP; // stop the I2c 
+            }else if(interrupt & I2C_ISR_TXE){
+                    // TX empty, send next byte
+                    MPU_I2C->TXDR = (uint8_t) deQueue(mpuTxQueue);
+            }
 	}else{
+            /* Reading */
 		if(interrupt & I2C_ISR_RXNE){
 			// RX is not empty, read it before next incoming
 			enQueue(mpuRxQueue, MPU_I2C->RXDR);

@@ -74,6 +74,18 @@ struct hw_s {
 #endif
 };
 
+typedef struct {
+    uint16_t gyro_x;
+    uint16_t gyro_y;
+    uint16_t gyro_z;
+    uint16_t accel_x;
+    uint16_t accel_y;
+    uint16_t accel_z;
+    uint16_t compass_x;
+    uint16_t compass_y;
+    uint16_t compass_z;
+} mpu_data_s;
+
 #define STARTUP_LPF				  (0x00)					// least filtering
 #define STARTUP_USERCTRL		BIT_FIFO_EN		  //turn on fifo
 #define STARTUP_FIFOEN			(0x78)					// use fifo for all measurements
@@ -138,6 +150,7 @@ extern struct gyro_reg_s *mpu_regs;
 extern const struct gyro_reg_s reg;
 extern const struct hw_s hw;
 
+mpu_data_s get_Data_Packet();
 void display_Register(uint16_t reg, uint16_t value);
 void mpu_init(void);
 void configure_Mpu(mpu_setup_s *config);
