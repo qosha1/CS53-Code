@@ -168,7 +168,7 @@ void configure_AccelRange(accelRange range){
 }
 
 mpu_data_s get_Data_Packet(){
-    
+     
 }
 
 void display_Register(uint16_t reg, uint16_t value){

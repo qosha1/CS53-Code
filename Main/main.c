@@ -74,10 +74,10 @@ int main (void) {
 	NVIC_EnableIRQ(I2C1_EV_IRQn);
 	
 	//Button_Initialize();    // init the capacitive buttons
-	display_Init();					// turn on display
-	mpu_I2C_Init();					// initialize i2c peripheral
-	mpu_init();							// Initialize the mpu registers
-	display_Int(15);				// Sample display data
+	display_Init();		// turn on display
+	mpu_I2C_Init();		// initialize i2c peripheral
+	mpu_init();		// Initialize the mpu registers
+	//display_Int(15);	// Sample display data
 	
 	//while(queue_isEmpty(mpuRxQueue)){ __NOP(); }
 	//display_Int(deQueue(mpuRxQueue));
