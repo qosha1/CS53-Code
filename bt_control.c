@@ -1,13 +1,20 @@
 
 #include "bt_control.h"   // bluetooth specific constants
+#include "HCI_constants.h" //
+#include "uart_control.h" // uart specific headers
 #include "stm32f373xc.h" // Device header
 #include "../Main/mpu_constants.h" // mpu specific constants
 #include "../Peripherals/i2c_control.h"
+//#include "HCIAPI.h"
+//#include "HCITypes.h"
 #include <stdlib.h>
 
+Queue *btTxQueue; // Queues for handling input/output of data to controller
+Queue *btRxQueue;
+
 /* function prototypes */
-void init_Uart();
 void init_Bt_Controller();
+uint8_t enqueue_Bt_Command(void *bt_command, uint8_t command_size);
 
 void bt_init(){
 	
@@ -42,7 +49,11 @@ void bt_init(){
   GPIOA->OTYPER   |=  (1UL << 1*BT_SHUTD);
 	GPIOA->PUPDR    |=  (1UL << 2*BT_SHUTD)   ;   /* OD, pullup         */
 	
-	init_Uart();
+		/* Setup the queues for data transfer */	
+	btTxQueue = initQueue(BT_QUEUE_LENGTH);
+	btRxQueue = initQueue(BT_QUEUE_LENGTH);
+	
+	init_Uart(BT_USART, btRxQueue, btTxQueue, BT_STARTUP_DIVIDER);
 	
 	Delay(20); /* wait for bluetooth reset */
 	GPIOA->ODR		  |= (1UL << BT_SHUTD); /* release shutdown pin */
@@ -51,14 +62,6 @@ void bt_init(){
 	init_Bt_Controller();
 }
 
-void init_Uart(){
-	BT_USART->CR1 |= USART_CR1_TXEIE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE;
-	BT_USART->CR2 &= ~(USART_CR2_LINEN | USART_CR2_CLKEN); /* Setup for asyncronous mode */
-  BT_USART->CR3 &= ~(USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN);
-	BT_USART->CR3 |= USART_CR3_CTSE | USART_CR3_RTSE;
-	BT_USART->BRR = BT_STARTUP_DIVIDER;
-	BT_USART->CR1 |= USART_CR1_UE;
-}
 
 /* Bt controller defaults:
   bit rate: 115.2 kbps
@@ -67,9 +70,36 @@ void init_Uart(){
 	No parity bit
 */
 void init_Bt_Controller(){
-	
+	// Reset baud rate
+	// 
+	uint8_t error;
+	HCI_Set_Mws_Transport_Layer_Command_t *set_baud_command = malloc(HCI_Set_Mws_Transport_Layer_Command_Size);
+	set_baud_command->HCI_Command_Header = HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER;
+	set_baud_command->HCI_Command_Parameter_Length = HCI_Set_Mws_Transport_Layer_Command_Param_Length;
+	set_baud_command->From_Mws_Baud_Rate = BT_BAUD_RATE;
+	set_baud_command->To_Mws_Baud_Rate 	= BT_BAUD_RATE;
+	// Add command to send queue
+	error = enqueue_Bt_Command(set_baud_command, HCI_Set_Mws_Transport_Layer_Command_Size);
+	if(!error){ /* If no error, send command */
+		send_Data(BT_USART);
+	}
 }
 
+/* Returns Zero (0) if successful */ 
+uint8_t enqueue_Bt_Command(void *bt_command, uint8_t command_size){
+	uint8_t i = command_size;
+	uint8_t *command = (uint8_t *)bt_command;
+	while(i > 0 && !queue_isFull(btTxQueue)){
+		enQueue(btTxQueue, *command);
+		command++;
+		i++;
+	}
+	return i;
+}
+	
+void start_Bt_Inquiry(){
+	
+}
 void connect_Bluetooth(){
     
 }

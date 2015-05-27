@@ -70,8 +70,9 @@ int main (void) {
 	if(SysTick_Config(SystemCoreClock / 1000)){	/* Set the systick to ms */
 		while(1);
 	}
-	NVIC_EnableIRQ(I2C2_EV_IRQn); // enable interrupt vectors
-	NVIC_EnableIRQ(I2C1_EV_IRQn);
+	NVIC_EnableIRQ(I2C2_EV_IRQn); //Display interrupt
+	NVIC_EnableIRQ(I2C1_EV_IRQn); //MPU motion control interrupt
+	NVIC_EnableIRQ(USART1_IRQn);	//BT USART interrupt
 	
 	//Button_Initialize();    // init the capacitive buttons
 	display_Init();		// turn on display
