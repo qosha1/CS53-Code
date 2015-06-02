@@ -21,18 +21,45 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
 Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
-C:\Users\Quinn\Documents\EECS53\Keil Project\WorkoutGenie.uvprojx
-Project File Date:  04/09/2015
+C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\WorkoutGenie.uvprojx
+Project File Date:  05/18/2015
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling i2c_control.c...
-Peripherals\i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+Main\../Peripherals/Display.h(109): warning:  #1-D: last line of file ends without a newline
+      ,0,254,198,140,24,48,96,194,198,254,0,0};                       // 'Z' 90
+Main\../mpu_control.h(153): warning:  #1295-D: Deprecated declaration get_Data_Packet - give arg types
+  mpu_data_s get_Data_Packet();
+Main\../mpu_control.h(160): warning:  #1-D: last line of file ends without a newline
+  #endif // MPU_REGISTERS_H
+Main\../Peripherals/i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
   #endif        /* i2c_initialize */
-Peripherals\i2c_control.c: 1 warning, 0 errors
+Main\main.c(56): warning:  #177-D: variable "states" was declared but never referenced
+        static const uint32_t states[] = 
+Main\main.c(64): warning:  #177-D: variable "key" was declared but never referenced
+        enum keyCode key;
+Main\main.c(66): warning:  #177-D: variable "prevState" was declared but never referenced
+        enum state_type prevState = STATUS_IDLE; // default to idle
+Main\main.c(104): warning:  #177-D: function "getKey" was declared but never referenced
+  static enum keyCode getKey(void)
+Main\main.c: 8 warnings, 0 errors
+compiling bt_control.c...
+bt_control.h(27): warning:  #1-D: last line of file ends without a newline
+  extern Queue *btRxQueue;
+uart_control.h(10): warning:  #1-D: last line of file ends without a newline
+  extern void USART2_IRQHandler(void);
+C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
+  #endif        /* i2c_initialize */
+bt_control.c(16): warning:  #1295-D: Deprecated declaration init_Bt_Controller - give arg types
+  void init_Bt_Controller();
+bt_control.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=4696 RO-data=1500 RW-data=40 ZI-data=3680  
-".\Objects\WorkoutGenie.axf" - 0 Error(s), 1 Warning(s).
+.\Objects\WorkoutGenie.axf: Error: L6218E: Undefined symbol init_Uart (referred from bt_control.o).
+.\Objects\WorkoutGenie.axf: Error: L6218E: Undefined symbol send_Data (referred from bt_control.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 2 error messages.
+".\Objects\WorkoutGenie.axf" - 2 Error(s), 12 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -49,7 +76,7 @@ Package Vendor: Keil
    * Component: Startup Version: 1.3.0
 
 <h2>Collection of Component include folders:</h2>
-  C:\Users\Quinn\Documents\EECS53\Keil Project\RTE
+  C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE
   C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
   C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include
 
@@ -62,6 +89,7 @@ Package Vendor: Keil
       Source file:   Device\Source\ARM\startup_stm32f373xc.s
       Source file:   Device\Source\system_stm32f3xx.c
       Source file:   Device\Source\ARM\STM32F3xx_OPT.s
+Target not created.
 </pre>
 </body>
 </html>

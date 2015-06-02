@@ -13,6 +13,9 @@
 /*   08/25/00  D. Lange       Initial creation.                               */
 /*   12/07/07  D. Mason       Changes for BT 2.1                              */
 /******************************************************************************/
+#ifndef _HCI_CONSTANTSH
+#define _HCI_CONSTANTSH
+
 #include <stdint.h>
 
 typedef enum
@@ -721,3 +724,5 @@ typedef struct _Inquiry_Command_Typedef
 #define HCI_PACKET_TYPE_2_EV5_MAXIMUM_PAYLOAD_SIZE                       576
 #define HCI_PACKET_TYPE_3_EV3_MAXIMUM_PAYLOAD_SIZE                       288
 #define HCI_PACKET_TYPE_3_EV5_MAXIMUM_PAYLOAD_SIZE                       864
+
+#endif //_HCI_CONSTANTSH

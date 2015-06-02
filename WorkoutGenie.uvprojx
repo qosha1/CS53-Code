@@ -443,6 +443,21 @@
               <FileType>1</FileType>
               <FilePath>.\mpu_control.c</FilePath>
             </File>
+            <File>
+              <FileName>bt_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\bt_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>HCIAPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HCIAPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>HCITypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HCITypes.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

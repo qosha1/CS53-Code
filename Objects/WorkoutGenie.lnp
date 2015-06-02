@@ -5,6 +5,7 @@
 ".\objects\i2c_control.o"
 ".\objects\queue.o"
 ".\objects\mpu_control.o"
+".\objects\bt_control.o"
 ".\objects\startup_stm32f373xc.o"
 ".\objects\system_stm32f3xx.o"
 --strict --scatter ".\Objects\WorkoutGenie.sct"

@@ -5,7 +5,7 @@
 #include "stm32f373xc.h" // Device header
 #include "../Main/mpu_constants.h" // mpu specific constants
 #include "../Peripherals/i2c_control.h"
-//#include "HCIAPI.h"
+#include "hci_api.h"
 //#include "HCITypes.h"
 #include <stdlib.h>
 
@@ -14,6 +14,7 @@ Queue *btRxQueue;
 
 /* function prototypes */
 void init_Bt_Controller();
+void get_Bt_Response(void *hci_struct, uint8_t hci_header_size, uint8_t hci_parameter_size);
 uint8_t enqueue_Bt_Command(void *bt_command, uint8_t command_size);
 
 void bt_init(){
@@ -73,6 +74,8 @@ void init_Bt_Controller(){
 	// Reset baud rate
 	// 
 	uint8_t error;
+	uint8_t event_byte;
+	uint8_t event_value;
 	HCI_Set_Mws_Transport_Layer_Command_t *set_baud_command = malloc(HCI_Set_Mws_Transport_Layer_Command_Size);
 	set_baud_command->HCI_Command_Header = HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER;
 	set_baud_command->HCI_Command_Parameter_Length = HCI_Set_Mws_Transport_Layer_Command_Param_Length;
@@ -83,9 +86,39 @@ void init_Bt_Controller(){
 	if(!error){ /* If no error, send command */
 		send_Data(BT_USART);
 	}
+	
+	HCI_Event_Packet_Header_t *command_response = malloc(HCI_EVENT_PACKET_HEADER_SIZE);
+	command_response->HCIPacketData = malloc(HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE);	
+	/*wait for command complete event */
+	get_Bt_Response(command_response, HCI_EVENT_PACKET_HEADER_SIZE, HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE);
+
 }
 
-/* Returns Zero (0) if successful */ 
+void get_Bt_Response(void *hci_struct, uint8_t hci_header_size, uint8_t hci_parameter_size){
+	
+	uint8_t event_byte;
+	uint8_t event_value;
+	uint8_t *hci_response = (uint8_t *)hci_struct;
+	
+	/*  Build the Bluetooth header */
+	for(event_byte = 0; event_byte < hci_header_size - 1; event_byte++){
+		while(queue_isEmpty(btRxQueue)){/* wait for the commmand response */}
+		event_value = deQueue(btRxQueue);
+		*hci_response = event_value;
+		hci_response++;
+	}
+	/* Build the Bluetooth parameter array */
+	hci_response = (uint8_t *)hci_response; /* pointer to pointer to data */
+	for(event_byte = 0; event_byte < hci_parameter_size; event_byte++){
+		while(queue_isEmpty(btRxQueue)){ }
+		event_value = deQueue(btRxQueue);
+		*hci_response = event_value;
+		hci_response++;
+	}
+	
+}
+
+/* Returns Zero (0) if successful, nonzero if not */ 
 uint8_t enqueue_Bt_Command(void *bt_command, uint8_t command_size){
 	uint8_t i = command_size;
 	uint8_t *command = (uint8_t *)bt_command;
