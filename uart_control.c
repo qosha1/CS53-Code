@@ -7,7 +7,7 @@ Queue *Usart1_TxQueue;
 void init_Uart(USART_TypeDef *USART, Queue *Usart_RxQueue, Queue *Usart_TxQueue, uint32_t divider){
 	USART->CR1 |= USART_CR1_TXEIE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE;
 	USART->CR2 &= ~(USART_CR2_LINEN | USART_CR2_CLKEN); /* Setup for asyncronous mode */
-  USART->CR3 &= ~(USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN);
+  	USART->CR3 &= ~(USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN);
 	USART->CR3 |= USART_CR3_CTSE | USART_CR3_RTSE;
 	USART->BRR = divider;
 	USART->CR1 |= USART_CR1_UE;
@@ -18,6 +18,15 @@ void init_Uart(USART_TypeDef *USART, Queue *Usart_RxQueue, Queue *Usart_TxQueue,
 	}else if(USART == USART2){
 		/* Implement for USART2 functionality */
 	}
+}
+
+/* Return zero if successful, non-zero if not */
+int update_Baud_Rate(USART_TypeDef *USART, uint32_t baud_rate_divisor){
+	USART->CR1 &= ~USART_CR1_UE; /* Disable the usart */
+	USART->BRR = baud_rate_divisor; /* set new divisor */
+	USART->CR1 |= USART_CR1_UE; /* reenable the usart */
+	
+	return 0;
 }
 
 /* In case of new data transfers, kickstart the USART device */

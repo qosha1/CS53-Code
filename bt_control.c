@@ -11,6 +11,7 @@
 
 Queue *btTxQueue; // Queues for handling input/output of data to controller
 Queue *btRxQueue;
+HCI_Bt_Inst_t *bt_instance; /* structure for the local bluetooth instance */
 
 /* function prototypes */
 void init_Bt_Controller();
@@ -46,14 +47,16 @@ void bt_init(){
 
 	//Bluetooth shutdown output
 	GPIOA->MODER    |=  (1UL << 2*BT_SHUTD)   ;   /* output             */
-  GPIOA->OSPEEDR  &= ~((3UL << 2*BT_SHUTD)  );  /* Low Speed          */
-  GPIOA->OTYPER   |=  (1UL << 1*BT_SHUTD);
+    GPIOA->OSPEEDR  &= ~((3UL << 2*BT_SHUTD)  );  /* Low Speed          */
+    GPIOA->OTYPER   |=  (1UL << 1*BT_SHUTD);
 	GPIOA->PUPDR    |=  (1UL << 2*BT_SHUTD)   ;   /* OD, pullup         */
 	
 		/* Setup the queues for data transfer */	
 	btTxQueue = initQueue(BT_QUEUE_LENGTH);
 	btRxQueue = initQueue(BT_QUEUE_LENGTH);
-	
+	/* Initialize memory for the bluetooth instance */
+	bt_instance = malloc(HCI_BT_INST_SIZE);
+
 	init_Uart(BT_USART, btRxQueue, btTxQueue, BT_STARTUP_DIVIDER);
 	
 	Delay(20); /* wait for bluetooth reset */
@@ -77,8 +80,8 @@ void init_Bt_Controller(){
 	uint8_t event_byte;
 	uint8_t event_value;
 	HCI_Set_Mws_Transport_Layer_Command_t *set_baud_command = malloc(HCI_Set_Mws_Transport_Layer_Command_Size);
-	set_baud_command->HCI_Command_Header = HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER;
-	set_baud_command->HCI_Command_Parameter_Length = HCI_Set_Mws_Transport_Layer_Command_Param_Length;
+	set_baud_command->HCI_Command_Header->Command_OpCode = HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER;
+	set_baud_command->HCI_Command_Header->Parameter_Total_Length = HCI_Set_Mws_Transport_Layer_Command_Param_Length;
 	set_baud_command->From_Mws_Baud_Rate = BT_BAUD_RATE;
 	set_baud_command->To_Mws_Baud_Rate 	= BT_BAUD_RATE;
 	// Add command to send queue
@@ -91,6 +94,12 @@ void init_Bt_Controller(){
 	command_response->HCIPacketData = malloc(HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE);	
 	/*wait for command complete event */
 	get_Bt_Response(command_response, HCI_EVENT_PACKET_HEADER_SIZE, HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE);
+
+	if(command_response->HCIPacketType == ptHCIEventPacket && 
+		command_response->HCIEventCode == HCI_EVENT_CODE_COMMAND_COMPLETE){
+		/* The response is the correct command complete.  */
+		update_Baud_Rate(BT_USART, BT_DIVISOR); /* update the USART baud rate */
+	}
 
 }
 
@@ -130,11 +139,36 @@ uint8_t enqueue_Bt_Command(void *bt_command, uint8_t command_size){
 	return i;
 }
 	
-void start_Bt_Inquiry(){
-	
-}
 void connect_Bluetooth(){
     
+    /* Process:
+    	1. Start inquiry
+    	2. Acquire information (BD_ADDR of other controller)
+    	3. Page (connect) to other 
+    */
+    bt_instance->LAP->octet_1 = BT_LAP_CODE_OCTET_1;
+    bt_instance->LAP->octet_2 = BT_LAP_CODE_OCTET_2;
+    bt_instance->LAP->octet_3 = BT_LAP_CODE_OCTET_3;
+    start_Bt_Inquiry();
 }
+
+void start_Bt_Inquiry(){
+	uint8_t error;
+
+	HCI_Inquiry_Command_t *start_inquiry = malloc(HCI_Inquiry_Command_Size);
+	start_inquiry->HCI_Command_Header->Command_OpCode = HCI_COMMAND_OPCODE_INQUIRY;
+	start_inquiry->HCI_Command_Header->Parameter_Total_Length = 
+									HCI_INQUIRY_COMMAND_SIZE - HCI_COMMAND_HEADER_SIZE;
+	start_inquiry->LAP 			  = bt_instance->LAP;
+	start_inquiry->Inquiry_Length = BT_INQUIRY_LENGTH;
+	start_inquiry->Num_Responses  = BT_NUM_INQUIRY_RESPONSES;
+
+	error = enqueue_Bt_Command(start_inquiry, HCI_INQUIRY_COMMAND_SIZE);
+	if(!error){
+
+
+	}
+}
+
 
 
