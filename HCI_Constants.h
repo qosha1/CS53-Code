@@ -525,7 +525,7 @@ typedef struct _Inquiry_Command_Typedef
    /* Version 4.0 + LE).                                                */
 #define HCI_COMMAND_OPCODE_READ_LE_HOST_SUPPORTED                       (HCI_MAKE_COMMAND_OPCODE(HCI_COMMAND_CODE_CONTROL_BASEBAND_OGF, HCI_COMMAND_CODE_READ_LE_HOST_SUPPORTED_OCF))
 #define HCI_COMMAND_OPCODE_WRITE_LE_HOST_SUPPORTED                      (HCI_MAKE_COMMAND_OPCODE(HCI_COMMAND_CODE_CONTROL_BASEBAND_OGF, HCI_COMMAND_CODE_WRITE_LE_HOST_SUPPORTED_OCF))
-#define HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER											(HCI_MAKE_COMMAND_OPCODE(HCI_COMMAND_CODE_CONTROL_BASEBAND_OGF, HCI_COMMAND_CODE_SET_MWS_TRANSPORT_LAYER_OCF))
+#define HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER						(HCI_MAKE_COMMAND_OPCODE(HCI_COMMAND_CODE_CONTROL_BASEBAND_OGF, HCI_COMMAND_CODE_SET_MWS_TRANSPORT_LAYER_OCF))
  
 	 /* HCI Command Code OpCode Definitions (Informational Parameters).   */
 #define HCI_COMMAND_OPCODE_READ_LOCAL_VERSION_INFORMATION               (HCI_MAKE_COMMAND_OPCODE(HCI_COMMAND_CODE_INFORMATIONAL_PARAMETERS_OGF, HCI_COMMAND_CODE_READ_LOCAL_VERSION_INFORMATION_OCF))
@@ -724,5 +724,24 @@ typedef struct _Inquiry_Command_Typedef
 #define HCI_PACKET_TYPE_2_EV5_MAXIMUM_PAYLOAD_SIZE                       576
 #define HCI_PACKET_TYPE_3_EV3_MAXIMUM_PAYLOAD_SIZE                       288
 #define HCI_PACKET_TYPE_3_EV5_MAXIMUM_PAYLOAD_SIZE                       864
+
+
+
+/* The following Constants represent the defined Bluetooth HCI Simple*/
+/* Pairing Modes (Version 2.1 + EDR).                                */
+#define HCI_SIMPLE_PAIRING_MODE_NOT_ENABLED                             0x00
+#define HCI_SIMPLE_PAIRING_MODE_ENABLED                                 0x01
+
+/* The following Constants represent the defined Bluetooth HCI Scan  */
+/* Enable Types.                                                     */
+#define HCI_SCAN_ENABLE_NO_SCANS_ENABLED                                0x00
+#define HCI_SCAN_ENABLE_INQUIRY_SCAN_ENABLED_PAGE_SCAN_DISABLED         0x01
+#define HCI_SCAN_ENABLE_INQUIRY_SCAN_DISABLED_PAGE_SCAN_ENABLED         0x02
+#define HCI_SCAN_ENABLE_INQUIRY_SCAN_ENABLED_PAGE_SCAN_ENABLED          0x03
+
+#define HCI_SCAN_ENABLE_INQUIRY_SCAN_ENABLED_BIT_MASK                   0x01
+#define HCI_SCAN_ENABLE_PAGE_SCAN_ENABLED_BIT_MASK                      0x02
+
+
 
 #endif //_HCI_CONSTANTSH

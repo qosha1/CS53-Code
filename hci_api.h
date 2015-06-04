@@ -149,7 +149,7 @@ typedef struct _tagHCI_Inquiry_Result_Data_t
 typedef struct _tagHCI_Inquiry_Result_Event_Data_t
 {
    uint8_t                    Num_Responses;
-   HCI_Inquiry_Result_Data_t HCI_Inquiry_Result_Data[1];
+   HCI_Inquiry_Result_Data_t  HCI_Inquiry_Result_Data[1];
 } HCI_Inquiry_Result_Event_Data_t;
 
    /* The following MACRO is a utility MACRO that exists to aid code    */
@@ -167,7 +167,7 @@ typedef struct _tagHCI_Inquiry_Result_Event_Data_t
 typedef struct _tagHCI_Event_Data_t
 {
    HCI_Event_Type_t Event_Data_Type;
-   Word_t           Event_Data_Size;
+   uint8_t          Event_Data_Size;
    union
    {
       HCI_Inquiry_Complete_Event_Data_t                            *HCI_Inquiry_Complete_Event_Data;
