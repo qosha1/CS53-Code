@@ -86,9 +86,11 @@ typedef struct {
     uint16_t compass_z;
 } mpu_data_s;
 
+#define DATA_INVALID				(0x8000)
+
 #define STARTUP_LPF				  (0x00)					// least filtering
 #define STARTUP_USERCTRL		BIT_FIFO_EN		  //turn on fifo
-#define STARTUP_FIFOEN			(0x78)					// use fifo for all measurements
+#define STARTUP_FIFOEN			BIT_FIFO_EN_XYZA | BIT_FIFO_EN_XYZG// use fifo for all measurements
 #define STARTUP_GYROCFG			(0x00)					// use all gyros at small range
 #define STARTUP_ACCELCFG		(0x00)					// use all accels at small range
 #define STARTUP_INTENABLE		BIT_DATA_RDY_EN | BIT_FIFO_OVERFLOW	// interrupt on daty ready
@@ -136,6 +138,9 @@ typedef struct {
 #define BIT_STBY_ZG         (0x01)
 #define BIT_STBY_XYZA       (BIT_STBY_XA | BIT_STBY_YA | BIT_STBY_ZA)
 #define BIT_STBY_XYZG       (BIT_STBY_XG | BIT_STBY_YG | BIT_STBY_ZG)
+#define BIT_FIFO_EN_XYZA		(0x08)
+#define BIT_FIFO_EN_XYZG		(0x70)
+
 
 typedef enum  /* FSR values for accelerometer settings */
 	{
@@ -150,7 +155,7 @@ extern struct gyro_reg_s *mpu_regs;
 extern const struct gyro_reg_s reg;
 extern const struct hw_s hw;
 
-mpu_data_s get_Data_Packet();
+mpu_data_s * get_Data_Packet();
 void display_Register(uint16_t reg, uint16_t value);
 void mpu_init(void);
 void configure_Mpu(mpu_setup_s *config);

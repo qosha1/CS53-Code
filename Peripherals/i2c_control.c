@@ -61,6 +61,7 @@ void mpu_I2C_Init(void){
 	free(i2c_speed);
 	free(I2C_Init);
 }
+
 void I2C_Initialize(I2C_Initstruct *I2Cx)
 {
   uint32_t tmpreg = 0;
@@ -194,6 +195,14 @@ void I2C_GenerateSTART(I2C_TypeDef* I2Cx, boolean Enable)
   }
 }
 
+boolean mpu_isInitialized(){
+	int interrupt = 0;
+	interrupt = MPU_INTRPT & GPIOB->IDR;
+	if(!interrupt){ // active low signal 
+			return true;
+	}
+	return false;
+}
 void I2C1_EV_IRQHandler(void){
 	uint32_t interrupt =  MPU_I2C->ISR;
 	if(interrupt & I2C_ISR_STOPF){

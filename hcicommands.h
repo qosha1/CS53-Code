@@ -26,8 +26,15 @@ typedef struct _tagHCI_Inquiry_Command_t
 
 #define HCI_INQUIRY_COMMAND_SIZE                         (sizeof(HCI_Inquiry_Command_t))
 
-#endif // __hcicommands__
 
+/**************************** Begin VS_ Controller and Baseband Commands ***************************/
+typedef struct _tagHCI_Vs_Set_Baud_Command_t
+{
+    HCI_Command_Header_t HCI_Command_Header;
+    uint32_t Baud_Rate;
+} HCI_Vs_Set_Baud_Command_t;
+
+#define HCI_VS_SET_BAUD_COMMAND_SIZE		(sizeof (HCI_Vs_Set_Baud_Command_t))
 
 /**************************** Begin Controller and Baseband Commands ***************************/
 
@@ -37,6 +44,7 @@ typedef struct _tagHCI_Write_Simple_Pairing_Mode_Command_t
     uint8_t               Simple_Pairing_Enable;
 } HCI_Write_Simple_Pairing_Mode_Command_t;
 
+#define HCI_WRITE_SIMPLE_PAIRING_MODE_COMMAND_SIZE       (sizeof(HCI_Write_Simple_Pairing_Mode_Command_t))
 
 typedef struct _tagHCI_Write_Scan_Enable_Command_t
 {
@@ -54,5 +62,13 @@ typedef struct _tagHCI_Set_Mws_Transport_Layer_Command_t
     uint32_t From_Mws_Baud_Rate;
 } HCI_Set_Mws_Transport_Layer_Command_t;
 
-#define HCI_Set_Mws_Transport_Layer_Command_Size		(sizeof (HCI_Set_Mws_Transport_Layer_Command_t))
-#define HCI_Set_Mws_Transport_Layer_Command_Param_Length  ((uint8_t) 0x09)
+#define HCI_SET_MWS_TRANSPORT_LAYER_COMMAND_SIZE		(sizeof (HCI_Set_Mws_Transport_Layer_Command_t))
+
+
+
+
+
+
+
+
+#endif // __hcicommands__

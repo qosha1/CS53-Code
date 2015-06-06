@@ -24,7 +24,6 @@ typedef enum
 	BT_HCI_RTS  = 11,
 	BT_HCI_CTS  = 12
 }PA_Block;
-	
 
 // PB Block
 typedef enum

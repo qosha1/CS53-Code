@@ -1,10 +1,11 @@
 #include <stdint.h> 			// 
 #include "../Peripherals/Queue.h"	// Queue functions
 
-#define BT_QUEUE_LENGTH							((uint32_t) 0x80)
+#define BT_QUEUE_LENGTH						((uint32_t) 0x80)
 
-#define BT_STARTUP_DIVIDER 						((uint16_t) 139)
-#define BT_DIVIDER								((uint16_t)   8)
+#define BT_RESET_TIME							((uint32_t) 0x0010)
+#define BT_STARTUP_DIVIDER 				((uint16_t) 139)
+#define BT_DIVISOR								((uint16_t)   8)
 #define BT_BAUD_RATE							((uint32_t) 2000000)
 
 /* Constants for Bluetooth inquiries and connections */
@@ -15,5 +16,10 @@
 #define BT_LAP_CODE_OCTET_2						((uint8_t) 0x8B)
 #define BT_LAP_CODE_OCTET_3						((uint8_t) 0x9E)
 
+
+#define HCI_VS_SET_BAUD_OPCODE				((uint16_t) 0xFF36)
+
 extern Queue *btTxQueue;
 extern Queue *btRxQueue;
+
+void bt_Init(void);

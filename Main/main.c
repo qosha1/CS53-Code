@@ -9,6 +9,9 @@
 #include "../Peripherals/Display.h"			//display module
 #include "../mpu_control.h"							// Control functions for MPU
 #include "../Peripherals/i2c_control.h" // MPU communication methods
+#include "../bt_control.h" 							// bluetooth Functionality
+#include "../buttons.h"
+
 //#include "../Peripherals/Queue.h"
 static enum keyCode getKey(void); //Local function dec
 
@@ -53,6 +56,7 @@ void SystemCoreClockSetHSI(void) {
  * SRAM 			  :  24 Kb
  */
 int main (void) {
+	int button_press;
 	static const uint32_t states[] = 
 	{
 			STATUS_IDLE,
@@ -74,32 +78,37 @@ int main (void) {
 	NVIC_EnableIRQ(I2C1_EV_IRQn); //MPU motion control interrupt
 	NVIC_EnableIRQ(USART1_IRQn);	//BT USART interrupt
 	
+	//bt_Init();
 	//Button_Initialize();    // init the capacitive buttons
+	buttons_Init();	
 	display_Init();		// turn on display
+	while(1){
+	button_press = get_Button();
+		if(button_press){
+			display_Int(button_press);
+		}
+	}
 	mpu_I2C_Init();		// initialize i2c peripheral
 	mpu_init();		// Initialize the mpu registers
-	//display_Int(15);	// Sample display data
 	
 	//while(queue_isEmpty(mpuRxQueue)){ __NOP(); }
 	//display_Int(deQueue(mpuRxQueue));
-	
+
   while(1) {// simple FSM
-		//if(Buttons_KeyAvailable()){
-		//	get_Key();
-		//	key = getKey();
-			
-		//	curState = states[key];
-		//}
-		
-		//if(curState != prevState){ //update functions
+		key = getKey();
+		if(key){
+			curState = states[key];
+		}
+		if(curState != prevState){ //update functions
 			if(curState == STATUS_IDLE){
 				//do nothing currently
-				//possible to enter low power mode
-			}
-	}
-	
-}
 
+			}else if(curState == STATUS_MEASURE){
+				//turn on measurement data. 
+			}
+		}
+	}
+}
 
 static enum keyCode getKey(void)
 {
@@ -111,22 +120,17 @@ static enum keyCode getKey(void)
 		KEYCODE_ILLEGAL
 	};
 	
-	int key;
+	uint8_t key;
 	
-	key = Buttons_GetKey(); // get key value
-	key = key >> 1;
-	if(key & 0x08){
-		//key 4
-		key = 3;
-	}else if(key & 0x04){
-		//key 3
-		key = 2;
-	}else if(key & 0x02){
-		//key 2
-		key = 1;
-	}else if(key & 0x01){
-		//key 1
-		key = 0;
+	key = get_Button(); // get button presses
+	if(key & CAP_BUTTON1){
+		key = CAP_BUTTON1;
+	}else if(key & CAP_BUTTON2){
+		key = CAP_BUTTON2;
+	}else if(key & CAP_BUTTON3){
+		key = CAP_BUTTON3;
+	}else if(key & CAP_BUTTON4){
+		key = CAP_BUTTON4;
 	}else {
 		//key invalid
 		key = 4;

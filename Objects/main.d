@@ -15,3 +15,6 @@
 .\objects\main.o: Main\../mpu_control.h
 .\objects\main.o: Main\../Peripherals/i2c_control.h
 .\objects\main.o: Main\../Peripherals/Queue.h
+.\objects\main.o: Main\../bt_control.h
+.\objects\main.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/Queue.h
+.\objects\main.o: Main\../buttons.h

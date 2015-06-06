@@ -17,6 +17,7 @@ Queue * initQueue(uint32_t queueLength){
 		dataQueue->headPtr = 0;
 		dataQueue->tailPtr = 0; //initialize pointers to queue
 		dataQueue->length = queueLength;
+		dataQueue->currentSize = 0;
 	}
 	
 	return dataQueue; // done and 
@@ -24,7 +25,7 @@ Queue * initQueue(uint32_t queueLength){
 void enQueue(Queue *dataQueue, int16_t data){
 	if(!queue_isFull(dataQueue)){
 		dataQueue->dataArray[dataQueue->tailPtr] = data;
-
+		dataQueue->currentSize++;
 		if(dataQueue->tailPtr == dataQueue->length - 1){
 			dataQueue->tailPtr = 0;// reset to beginning of array
 		}else{
@@ -36,7 +37,7 @@ int16_t deQueue(Queue *dataQueue){
 	int16_t data;
 	if(!queue_isEmpty(dataQueue)){
 		data = dataQueue->dataArray[dataQueue->headPtr];
-
+		dataQueue->currentSize--;
 		if(dataQueue->headPtr == dataQueue->length - 1){
 			dataQueue->headPtr = 0;// reset to beginning of array
 		}else{

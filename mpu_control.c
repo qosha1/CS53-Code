@@ -62,6 +62,7 @@ const struct hw_s hw = {
 
 void mpu_init(void){
 	mpu_setup_s *startup_config;
+	boolean is_Started;
 	
 	// allocate memory and set to zero
 	mpu_regs = malloc(sizeof *mpu_regs);
@@ -76,10 +77,13 @@ void mpu_init(void){
 
 	NVIC_SetPriority (EXTI9_5_IRQn, 0xff); 			/* set priority to lower than i2c */
 	NVIC_DisableIRQ(EXTI9_5_IRQn);							/* we don't want to interrupt during setup */
-		
+	
+	/* Check to see if MPU is already loaded (from pre-CPU reset) */
+	is_Started = mpu_isInitialized();
+	
 	// restart device 
 	enQueue(mpuTxQueue, reg.pwr_mgmt_1);				// enqueue the register number
-	enQueue(mpuTxQueue, BIT_RESET);	// enqueue the new value 
+	enQueue(mpuTxQueue, BIT_RESET);							// enqueue the new value 
 	mpu_writeRegister(1, reg.pwr_mgmt_1, false); // send to i2c interface
 	
 	Delay(500);// wait for reset
@@ -100,7 +104,7 @@ void mpu_init(void){
 	startup_config->int_enable = STARTUP_INTENABLE;
 	startup_config->int_pin_cfg = STARTUP_INTPINCFG;
 	
-	configure_Mpu(startup_config);			/* actually call the function to write values */
+	configure_Mpu(startup_config);			/* call the function to write values */
 	
 	free(startup_config);								/* release memory */
 	NVIC_ClearPendingIRQ(EXTI9_5_IRQn);	/* clear any initial interrupts */
@@ -166,9 +170,44 @@ void configure_AccelRange(accelRange range){
 	mpu_writeRegister(1, reg.accel_cfg, false); // send to i2c interface
 	
 }
-
-mpu_data_s get_Data_Packet(){
-     
+/* Function returns a data structure that hols all motion data. Only some fields may be *
+ * used depending on the settings of the MPU 		*/
+mpu_data_s * get_Data_Packet(){
+	mpu_data_s *data = malloc(sizeof(mpu_data_s));
+	uint8_t high_byte, low_byte;
+	uint8_t packet_size = 0;
+	/* Make sure that the queue has a full data packet */
+	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZG)
+		packet_size += 3;
+	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZA)
+		packet_size += 3;
+	if(mpuRxQueue->currentSize >= packet_size){
+		if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZG){ /* Check if the fifo is sending gyro data */
+				high_byte = deQueue(mpuRxQueue); /* Get data from Queue */
+				low_byte = deQueue(mpuRxQueue);
+				data->gyro_x = (high_byte << 8) | low_byte; /* Save data in correct slot */
+				high_byte = deQueue(mpuRxQueue);
+				low_byte = deQueue(mpuRxQueue);
+				data->gyro_y = (high_byte << 8) | low_byte;
+				high_byte = deQueue(mpuRxQueue);
+				low_byte = deQueue(mpuRxQueue);
+				data->gyro_z = (high_byte << 8) | low_byte;
+			}	
+		if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZA){		/* Check if the fifo is sending accel data */
+				high_byte = deQueue(mpuRxQueue); /* Get data from Queue */
+				low_byte = deQueue(mpuRxQueue);
+				data->accel_x = (high_byte << 8) | low_byte; /* Save data in correct slot */
+				high_byte = deQueue(mpuRxQueue);
+				low_byte = deQueue(mpuRxQueue);
+				data->accel_y = (high_byte << 8) | low_byte;
+				high_byte = deQueue(mpuRxQueue);
+				low_byte = deQueue(mpuRxQueue);
+				data->accel_z = (high_byte << 8) | low_byte;
+		}		
+	}else {
+		/* TODO: Error handling */
+	}
+	return data;
 }
 
 void display_Register(uint16_t reg, uint16_t value){

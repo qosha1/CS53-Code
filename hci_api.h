@@ -13,16 +13,16 @@ typedef struct _tagHCI_Bt_inst_t
    BD_ADDR_t   BD_ADDR;
    Link_Key_t  Link_Key;
    LAP_t       LAP;
-} HCI_Bt_inst_t;
+} HCI_Bt_Inst_t;
 
-#define HCI_BT_INST_SIZE                                (sizeof(HCI_Bt_inst_t))
+#define HCI_BT_INST_SIZE                                (sizeof(HCI_Bt_Inst_t))
 
 /* HCI Event API Types.                                              */
 typedef enum
 {
    etInquiry_Complete_Event,
    etInquiry_Result_Event,
-   /*etConnection_Complete_Event,
+   etConnection_Complete_Event,
    etConnection_Request_Event,
    etDisconnection_Complete_Event,
    etAuthentication_Complete_Event,
@@ -33,7 +33,8 @@ typedef enum
    etRead_Remote_Supported_Features_Complete_Event,
    etRead_Remote_Version_Information_Complete_Event,
    etQoS_Setup_Complete_Event,
-   etHardware_Error_Event,
+   etCommand_Complete_Event,
+	 etHardware_Error_Event,
    etFlush_Occurred_Event,
    etRole_Change_Event,
    etNumber_Of_Completed_Packets_Event,
@@ -87,20 +88,21 @@ typedef enum
    etAMP_Test_End_Event,
    etAMP_Receiver_Report_Event,
    etLE_Meta_Event,
-   etPlatform_Specific_Event*/
+   etPlatform_Specific_Event
 } HCI_Event_Type_t;
 
 typedef struct _tagHCI_Event_Packet_Header_t
 {
    HCI_PacketType_t HCIPacketType;
-	uint8_t				HCIEventCode;
+	 uint8_t					HCIEventCode;
    uint8_t		      HCIPacketLength;
    uint8_t		      *HCIPacketData;
 } HCI_Event_Packet_Header_t;
 
 #define HCI_EVENT_PACKET_HEADER_SIZE                    (sizeof(HCI_Event_Packet_Header_t))
 
-#define HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE (uint8_t (0x01))
+
+#define HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE 1
 
 
 typedef struct _tagHCI_Stored_Link_Key_Info_t
@@ -115,8 +117,8 @@ typedef struct _tagHCI_Stored_Link_Key_Info_t
 
 typedef struct _tagHCI_Inquiry_Complete_Event_Data_t
 {
-   Byte_t Status;
-   Byte_t Num_Responses;
+   uint8_t Status;
+   uint8_t Num_Responses;
 } HCI_Inquiry_Complete_Event_Data_t;
 
 #define HCI_INQUIRY_COMPLETE_EVENT_DATA_SIZE            (sizeof(HCI_Inquiry_Complete_Event_Data_t))
@@ -198,7 +200,8 @@ typedef struct _tagHCI_Event_Data_t
       HCI_Read_Clock_Offset_Complete_Event_Data_t                  *HCI_Read_Clock_Offset_Complete_Event_Data;
       HCI_Connection_Packet_Type_Changed_Event_Data_t              *HCI_Connection_Packet_Type_Changed_Event_Data;
       HCI_QoS_Violation_Event_Data_t                               *HCI_QoS_Violation_Event_Data;
-      HCI_Page_Scan_Repetition_Mode_Change_Event_Data_t            *HCI_Page_Scan_Repetition_Mode_Change_Event_Data;
+      HCI_Command_Complete_Event_Data_t														 *HCI_Command_Complete_Event_Data;
+			HCI_Page_Scan_Repetition_Mode_Change_Event_Data_t            *HCI_Page_Scan_Repetition_Mode_Change_Event_Data;
       HCI_Page_Scan_Mode_Change_Event_Data_t                       *HCI_Page_Scan_Mode_Change_Event_Data;
       HCI_Flow_Specification_Complete_Event_Data_t                 *HCI_Flow_Specification_Complete_Event_Data;
       HCI_Inquiry_Result_With_RSSI_Event_Data_t                    *HCI_Inquiry_Result_With_RSSI_Event_Data;

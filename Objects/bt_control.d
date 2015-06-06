@@ -3,6 +3,9 @@
 .\objects\bt_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\bt_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/Queue.h
 .\objects\bt_control.o: HCI_constants.h
+.\objects\bt_control.o: hci_api.h
+.\objects\bt_control.o: bt_types.h
+.\objects\bt_control.o: hcicommands.h
 .\objects\bt_control.o: uart_control.h
 .\objects\bt_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/Queue.h
 .\objects\bt_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h
@@ -15,3 +18,4 @@
 .\objects\bt_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/i2c_control.h
 .\objects\bt_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/Queue.h
 .\objects\bt_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\bt_control.o: ti_stupid_sp.h

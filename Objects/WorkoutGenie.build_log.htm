@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
 C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\WorkoutGenie.uvprojx
-Project File Date:  05/18/2015
+Project File Date:  06/04/2015
 
 <h2>Output:</h2>
 Build target 'Target 1'
@@ -35,31 +35,40 @@ Main\../mpu_control.h(160): warning:  #1-D: last line of file ends without a new
   #endif // MPU_REGISTERS_H
 Main\../Peripherals/i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
   #endif        /* i2c_initialize */
-Main\main.c(56): warning:  #177-D: variable "states" was declared but never referenced
+Main\../bt_control.h(25): warning:  #1-D: last line of file ends without a newline
+  void bt_Init(void);
+Main\../buttons.h(13): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
+  void buttons_Init();
+Main\../buttons.h(14): warning:  #1-D: last line of file ends without a newline
+  uint8_t get_Button();
+Main\../buttons.h(14): warning:  #1295-D: Deprecated declaration get_Button - give arg types
+  uint8_t get_Button();
+Main\main.c(91): warning:  #111-D: statement is unreachable
+        mpu_I2C_Init();         // initialize i2c peripheral
+Main\main.c(60): warning:  #177-D: variable "states" was declared but never referenced
         static const uint32_t states[] = 
-Main\main.c(64): warning:  #177-D: variable "key" was declared but never referenced
+Main\main.c(68): warning:  #177-D: variable "key" was declared but never referenced
         enum keyCode key;
-Main\main.c(66): warning:  #177-D: variable "prevState" was declared but never referenced
+Main\main.c(70): warning:  #177-D: variable "prevState" was declared but never referenced
         enum state_type prevState = STATUS_IDLE; // default to idle
-Main\main.c(104): warning:  #177-D: function "getKey" was declared but never referenced
+Main\main.c(116): warning:  #177-D: function "getKey" was declared but never referenced
   static enum keyCode getKey(void)
-Main\main.c: 8 warnings, 0 errors
-compiling bt_control.c...
-bt_control.h(27): warning:  #1-D: last line of file ends without a newline
-  extern Queue *btRxQueue;
-uart_control.h(10): warning:  #1-D: last line of file ends without a newline
-  extern void USART2_IRQHandler(void);
-C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif        /* i2c_initialize */
-bt_control.c(16): warning:  #1295-D: Deprecated declaration init_Bt_Controller - give arg types
-  void init_Bt_Controller();
-bt_control.c: 4 warnings, 0 errors
+Main\main.c: 13 warnings, 0 errors
+compiling buttons.c...
+buttons.h(13): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
+  void buttons_Init();
+buttons.h(14): warning:  #1-D: last line of file ends without a newline
+  uint8_t get_Button();
+buttons.h(14): warning:  #1295-D: Deprecated declaration get_Button - give arg types
+  uint8_t get_Button();
+buttons.c(27): warning:  #1295-D: Deprecated declaration set_Threshold_Value - give arg types
+  void set_Threshold_Value();
+buttons.c(174): warning:  #1-D: last line of file ends without a newline
+  }
+buttons.c: 5 warnings, 0 errors
 linking...
-.\Objects\WorkoutGenie.axf: Error: L6218E: Undefined symbol init_Uart (referred from bt_control.o).
-.\Objects\WorkoutGenie.axf: Error: L6218E: Undefined symbol send_Data (referred from bt_control.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 2 error messages.
-".\Objects\WorkoutGenie.axf" - 2 Error(s), 12 Warning(s).
+Program Size: Code=4798 RO-data=1506 RW-data=48 ZI-data=3680  
+".\Objects\WorkoutGenie.axf" - 0 Error(s), 18 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -89,7 +98,6 @@ Package Vendor: Keil
       Source file:   Device\Source\ARM\startup_stm32f373xc.s
       Source file:   Device\Source\system_stm32f3xx.c
       Source file:   Device\Source\ARM\STM32F3xx_OPT.s
-Target not created.
 </pre>
 </body>
 </html>

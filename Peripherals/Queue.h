@@ -8,9 +8,10 @@
 typedef struct _Queue
 	{
 		uint32_t   length; /* Length of queue */
-		int16_t *dataArray; /* actual data for queue */
-		int16_t headPtr; /* pointer to top of queue */
-		int16_t tailPtr; /* pointer to end of queue */ 		
+		uint32_t	 currentSize; /* Number of elements in queue */
+		int16_t 	 *dataArray; /* actual data for queue */
+		int16_t 	 headPtr; /* pointer to top of queue */
+		int16_t 	 tailPtr; /* pointer to end of queue */ 		
 	} Queue;
 
 Queue *initQueue(uint32_t queueLength);

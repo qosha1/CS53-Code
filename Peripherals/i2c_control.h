@@ -50,6 +50,8 @@ typedef struct _I2C_Initstruct
 void mpu_I2C_Init(void);
 void mpu_writeRegister(uint16_t numBytes, uint16_t reg, boolean writeForRead);
 void mpu_readRegister(uint16_t numBytes, uint16_t reg);
+boolean mpu_isInitialized();
+
 extern void I2C1_EV_IRQHandler(void);
 void Delay (uint32_t dlyTicks);
 #endif	/* i2c_initialize */
