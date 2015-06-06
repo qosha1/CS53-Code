@@ -60,6 +60,9 @@ const struct hw_s hw = {
 #endif
 };
 
+mpu_data_s *average_data;	/* Keep a running average of the current data */
+boolean is_initialized;   /* True if mpu has been initialized to default values */
+
 void mpu_init(void){
 	mpu_setup_s *startup_config;
 	boolean is_Started;
@@ -75,7 +78,7 @@ void mpu_init(void){
 	mpu_regs->pwr_mgmt_1 = BIT_SLEEP; // starts in sleep mode
 	/* End configure of mpu_regs */
 
-	NVIC_SetPriority (EXTI9_5_IRQn, 0xff); 			/* set priority to lower than i2c */
+	NVIC_SetPriority (EXTI9_5_IRQn, 0x07); 			/* set priority to lower than i2c */
 	NVIC_DisableIRQ(EXTI9_5_IRQn);							/* we don't want to interrupt during setup */
 	
 	/* Check to see if MPU is already loaded (from pre-CPU reset) */
@@ -97,7 +100,9 @@ void mpu_init(void){
 	
 	/* Once device is on and awake, set it to default config */
 	startup_config = malloc(sizeof *startup_config);
+	startup_config->rate_div = STARTUP_RATE_DIV;
 	startup_config->lpf = STARTUP_LPF;
+	startup_config->user_ctrl = STARTUP_USERCTRL;
 	startup_config->accel_cfg = STARTUP_ACCELCFG;
 	startup_config->fifo_en = STARTUP_FIFOEN;
 	startup_config->gyro_cfg = STARTUP_GYROCFG;
@@ -107,7 +112,7 @@ void mpu_init(void){
 	configure_Mpu(startup_config);			/* call the function to write values */
 	
 	free(startup_config);								/* release memory */
-	NVIC_ClearPendingIRQ(EXTI9_5_IRQn);	/* clear any initial interrupts */
+	//NVIC_ClearPendingIRQ(EXTI9_5_IRQn);	/* clear any initial interrupts */
 	NVIC_EnableIRQ(EXTI9_5_IRQn);				/* turn interrupts back on */
 
 }
@@ -116,11 +121,12 @@ void configure_Mpu(mpu_setup_s *config){
 	uint16_t numBytes;
 	
 	/* Configure the LPF and gyros/accels */
-	enQueue(mpuTxQueue, reg.lpf);								/* enqueue the register */
+	enQueue(mpuTxQueue, reg.rate_div); 					/* enqueue the register */
+	enQueue(mpuTxQueue, config->rate_div);			/* enqueue values of regs */
 	enQueue(mpuTxQueue, config->lpf);						/* enqueue values of regs */
 	enQueue(mpuTxQueue, config->gyro_cfg);
 	enQueue(mpuTxQueue, config->accel_cfg);
-	numBytes = 3; 															 /* number of reg VALUES written */
+	numBytes = 4; 															 /* number of reg VALUES written */
 	mpu_writeRegister(numBytes, reg.lpf, false); /* can burst write consecutive regs */
 	/* Setup the fifo buffer on mpu */
 	enQueue(mpuTxQueue, reg.fifo_en);			  			/* enqueue the register */
@@ -175,13 +181,7 @@ void configure_AccelRange(accelRange range){
 mpu_data_s * get_Data_Packet(){
 	mpu_data_s *data = malloc(sizeof(mpu_data_s));
 	uint8_t high_byte, low_byte;
-	uint8_t packet_size = 0;
-	/* Make sure that the queue has a full data packet */
-	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZG)
-		packet_size += 3;
-	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZA)
-		packet_size += 3;
-	if(mpuRxQueue->currentSize >= packet_size){
+	if(data_Packet_Ready()){
 		if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZG){ /* Check if the fifo is sending gyro data */
 				high_byte = deQueue(mpuRxQueue); /* Get data from Queue */
 				low_byte = deQueue(mpuRxQueue);
@@ -210,6 +210,19 @@ mpu_data_s * get_Data_Packet(){
 	return data;
 }
 
+boolean data_Packet_Ready(){
+	uint8_t packet_size = 0;
+	/* Make sure that the queue has a full data packet */
+	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZG)
+		packet_size += 3;
+	if(mpu_regs->fifo_en & BIT_FIFO_EN_XYZA)
+		packet_size += 3;
+	if(mpuRxQueue->currentSize >= packet_size && is_initialized){
+		return true;
+	}
+	return false;
+}
+
 void display_Register(uint16_t reg, uint16_t value){
 	display_Int(reg);
 	display_Int(value);
@@ -219,19 +232,26 @@ void display_Register(uint16_t reg, uint16_t value){
 void EXTI9_5_IRQHandler(void){
 	uint16_t count;
 	uint16_t  interrupt;
-	mpu_readRegister(1, reg.int_status);		/* clear mpu status register */
-	while(queue_isEmpty(mpuRxQueue)){}
-	interrupt = deQueue(mpuRxQueue);		/* read status bits */
+	if(!(MPU_I2C->ISR & I2C_ISR_BUSY) && queue_isEmpty(mpuTxQueue)){
+		mpu_readRegister(1, reg.int_status);		/* clear mpu status register */
+		while(queue_isEmpty(mpuRxQueue)){}
+		interrupt = deQueue(mpuRxQueue);		/* read status bits */
 		
-	mpu_readRegister(2, reg.fifo_count_h);
-	
-	while(queue_isEmpty(mpuRxQueue)){}
-	count = deQueue(mpuRxQueue) & 0x3;	// get high bits
-	while(queue_isEmpty(mpuRxQueue)){}
-	count <<= 8; 	// shift to high byte
-	count = deQueue(mpuRxQueue);	// get lower byte
-	if(count > 0){	// If new data available
-		mpu_readRegister(count, reg.fifo_r_w); // finally read all the data!
-	}
+		if(!interrupt || interrupt == BIT_FIFO_OVERFLOW){
+			/* ruh roh, sampling too slow */
+		}else{
+			mpu_readRegister(2, reg.fifo_count_h);
+			
+			while(queue_isEmpty(mpuRxQueue)){}
+			count = deQueue(mpuRxQueue) & 0x3;	// get high bits
+			while(queue_isEmpty(mpuRxQueue)){}
+			count <<= 8; 	// shift to high byte
+			count = deQueue(mpuRxQueue);	// get lower byte
+			if(count > 0){	// If new data available
+				mpu_readRegister(count, reg.fifo_r_w); // finally read all the data!
+			}
+			is_initialized = true;									/* Reading from mpu, its init'd */
+			}
+		}
 }
 

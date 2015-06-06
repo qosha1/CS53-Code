@@ -9,8 +9,9 @@
 #include "../Peripherals/Display.h"			//display module
 #include "../mpu_control.h"							// Control functions for MPU
 #include "../Peripherals/i2c_control.h" // MPU communication methods
-#include "../bt_control.h" 							// bluetooth Functionality
+//#include "../bt_control.h" 							// bluetooth Functionality
 #include "../buttons.h"
+#include "../timer.h"										// Timer init and control functions
 
 //#include "../Peripherals/Queue.h"
 static enum keyCode getKey(void); //Local function dec
@@ -79,36 +80,50 @@ int main (void) {
 	NVIC_EnableIRQ(USART1_IRQn);	//BT USART interrupt
 	
 	//bt_Init();
-	//Button_Initialize();    // init the capacitive buttons
-	buttons_Init();	
+	buttons_Init();	/* Initialize button GPIOs and functions */
 	display_Init();		// turn on display
-	while(1){
+	/*while(1){
 	button_press = get_Button();
 		if(button_press){
 			display_Int(button_press);
 		}
-	}
+	}*/
+	display_Int(15);
+	display_Int(20);
+	display_Int(25);
+	display_Int(175);
+	display_Int(1345);
+	display_Int(1534);
 	mpu_I2C_Init();		// initialize i2c peripheral
 	mpu_init();		// Initialize the mpu registers
-	
+	init_Timer(MS_PER_SAMPLE);
+	start_Timer();
 	//while(queue_isEmpty(mpuRxQueue)){ __NOP(); }
-	//display_Int(deQueue(mpuRxQueue));
-
   while(1) {// simple FSM
 		key = getKey();
 		if(key){
 			curState = states[key];
 		}
+		
 		if(curState != prevState){ //update functions
 			if(curState == STATUS_IDLE){
 				//do nothing currently
-
+				if(data_Packet_Ready()){
+					display_Int(get_Data_Packet()->accel_x);
+				}
 			}else if(curState == STATUS_MEASURE){
 				//turn on measurement data. 
 			}
 		}
+		if(data_Packet_Ready() && finished_Flag){
+			display_Int(get_Data_Packet()->accel_x);
+			stop_Timer(); /* Reset timer */
+			start_Timer();
+		}
+		prevState = curState;
 	}
 }
+
 
 static enum keyCode getKey(void)
 {
@@ -117,7 +132,7 @@ static enum keyCode getKey(void)
 		KEYCODE_MEASURE,
 		KEYCODE_EXTRA1,
 		KEYCODE_EXTRA2,
-		KEYCODE_ILLEGAL
+		KEYCODE_ON
 	};
 	
 	uint8_t key;
@@ -132,7 +147,7 @@ static enum keyCode getKey(void)
 	}else if(key & CAP_BUTTON4){
 		key = CAP_BUTTON4;
 	}else {
-		//key invalid
+		//key idle
 		key = 4;
 	}
 	return keycodes[key]; // return keycode

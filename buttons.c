@@ -3,6 +3,7 @@
 #include "buttons.h"
 #include "stm32f373xc.h" // Device header
 #include "../Main/mpu_constants.h"
+#include "../timer.h"										// Timer init and control functions
 
 const struct _Button_Group buttons = 
 {
@@ -11,14 +12,15 @@ const struct _Button_Group buttons =
 	.button3 = CAP_BUTTON3,
 	.button4 = CAP_BUTTON4,
 };
-const uint8_t sampling_button[4] = 
+const uint8_t channel_button[4] = 
 {
 	CAP_BUTTON2,
 	CAP_BUTTON1,
-	CAP_BUTTON1,
-	CAP_BUTTON1
+	CAP_BUTTON4,
+	CAP_BUTTON3
 };
 uint32_t no_press_threshold; /* Count threshold for determining a press */
+uint8_t last_button; /* save the last output of get_Button() for dbouncing */
 
 /* Prototypes */ 
 void set_Sampling_Capacitor(uint8_t button);
@@ -47,6 +49,8 @@ void buttons_Init(){
 								| TSC_CR_CTPH_0 |TSC_CR_CTPL_0; /* Set max error count */
 	TSC->CR  		|= TSC_CR_TSCE; /* Enable to controller */
 	
+	init_Timer(KEY_DEBOUNCE_MS);
+	last_button = 0;
 	set_Threshold_Value();
 }
 /* This function returns an 8 bit value that contains any registered *
@@ -70,15 +74,20 @@ uint8_t get_Button(){
 		button_presses |= get_Single_Button(buttons.button2);
 		button_presses |= get_Single_Button(buttons.button3);
 		button_presses |= get_Single_Button(buttons.button4);
-	
-		return button_presses;
+		if(button_presses != last_button && button_presses){
+			last_button = button_presses;
+			
+			//start_Timer();
+			return button_presses;
+		}
+		return NO_BUTTON;
 }
 
 uint8_t get_Single_Button(uint8_t button){
 	uint32_t sample_count = 0;
 	
-	set_Sampling_Capacitor(sampling_button[button]);
-	set_Measure_Channel(button);
+	set_Sampling_Capacitor(button);
+	set_Measure_Channel(channel_button[button]);
 	TSC->ICR |= (TSC_ISR_EOAF | TSC_ISR_MCEF); /* Clear status register */
 	TSC->CR |= TSC_CR_START;				  /* Start the acquisition sequence */ 
 	
@@ -86,7 +95,7 @@ uint8_t get_Single_Button(uint8_t button){
 	if(!(TSC->ISR & TSC_ISR_MCEF)){ /* Didn't have an error */
 		TSC->ICR |= (TSC_ISR_EOAF | TSC_ISR_MCEF); /* Clear Status */
 		sample_count = TSC->IOGXCR[0];
-		if(sample_count >= no_press_threshold){
+		if(sample_count > no_press_threshold){
 			return 1 << button; /* Bitwise return value */
 		}
 		
@@ -102,12 +111,12 @@ uint8_t get_Single_Button(uint8_t button){
  * comparison with future values. It assumes that	no buttons 	*
  * are being pressed at the time. 														*/
 void set_Threshold_Value(){
-	uint32_t sample_count;
+	uint32_t sample_count = 0;
 	uint8_t	 successful_measures = 0;
 	uint8_t i;
 	for(i = 0; i < sizeof(buttons); i++){
-		set_Sampling_Capacitor(sampling_button[i]);
-		set_Measure_Channel(i);
+		set_Sampling_Capacitor(i);
+		set_Measure_Channel(channel_button[i]);
 		TSC->ICR |= (TSC_ISR_EOAF | TSC_ISR_MCEF); /* Clear status register */
 		TSC->CR |= TSC_CR_START;				  /* Start the acquisition sequence */ 
 		while(!TSC->ISR){} /* Wait until finished */

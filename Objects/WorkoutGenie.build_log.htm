@@ -26,49 +26,23 @@ Project File Date:  06/04/2015
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling main.c...
-Main\../Peripherals/Display.h(109): warning:  #1-D: last line of file ends without a newline
-      ,0,254,198,140,24,48,96,194,198,254,0,0};                       // 'Z' 90
-Main\../mpu_control.h(153): warning:  #1295-D: Deprecated declaration get_Data_Packet - give arg types
-  mpu_data_s get_Data_Packet();
-Main\../mpu_control.h(160): warning:  #1-D: last line of file ends without a newline
-  #endif // MPU_REGISTERS_H
-Main\../Peripherals/i2c_control.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif        /* i2c_initialize */
-Main\../bt_control.h(25): warning:  #1-D: last line of file ends without a newline
-  void bt_Init(void);
-Main\../buttons.h(13): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
-  void buttons_Init();
-Main\../buttons.h(14): warning:  #1-D: last line of file ends without a newline
-  uint8_t get_Button();
-Main\../buttons.h(14): warning:  #1295-D: Deprecated declaration get_Button - give arg types
-  uint8_t get_Button();
-Main\main.c(91): warning:  #111-D: statement is unreachable
-        mpu_I2C_Init();         // initialize i2c peripheral
-Main\main.c(60): warning:  #177-D: variable "states" was declared but never referenced
-        static const uint32_t states[] = 
-Main\main.c(68): warning:  #177-D: variable "key" was declared but never referenced
-        enum keyCode key;
-Main\main.c(70): warning:  #177-D: variable "prevState" was declared but never referenced
-        enum state_type prevState = STATUS_IDLE; // default to idle
-Main\main.c(116): warning:  #177-D: function "getKey" was declared but never referenced
-  static enum keyCode getKey(void)
-Main\main.c: 13 warnings, 0 errors
 compiling buttons.c...
-buttons.h(13): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
+buttons.h(16): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
   void buttons_Init();
-buttons.h(14): warning:  #1-D: last line of file ends without a newline
+buttons.h(17): warning:  #1-D: last line of file ends without a newline
   uint8_t get_Button();
-buttons.h(14): warning:  #1295-D: Deprecated declaration get_Button - give arg types
+buttons.h(17): warning:  #1295-D: Deprecated declaration get_Button - give arg types
   uint8_t get_Button();
-buttons.c(27): warning:  #1295-D: Deprecated declaration set_Threshold_Value - give arg types
+C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../timer.h(18): warning:  #1-D: last line of file ends without a newline
+  #endif //_timer_
+buttons.c(29): warning:  #1295-D: Deprecated declaration set_Threshold_Value - give arg types
   void set_Threshold_Value();
-buttons.c(174): warning:  #1-D: last line of file ends without a newline
+buttons.c(183): warning:  #1-D: last line of file ends without a newline
   }
-buttons.c: 5 warnings, 0 errors
+buttons.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=4798 RO-data=1506 RW-data=48 ZI-data=3680  
-".\Objects\WorkoutGenie.axf" - 0 Error(s), 18 Warning(s).
+Program Size: Code=6724 RO-data=1284 RW-data=72 ZI-data=3552  
+".\Objects\WorkoutGenie.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 

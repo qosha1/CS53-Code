@@ -1,5 +1,5 @@
 Dependencies for Project 'WorkoutGenie', Target 'Target 1': (DO NOT MODIFY !)
-F (.\Main\main.c)(0x557264CD)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\Main\main.c)(0x557333BB)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f3xx.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
@@ -10,14 +10,13 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
 I (Main\../Peripherals/Cap_buttons.h)(0x5508A3B6)
-I (Main\mpu_constants.h)(0x557233E7)
-I (Main\../Peripherals/Display.h)(0x552F1D07)
-I (Main\../Peripherals/Queue.h)(0x55073496)
-I (Main\../mpu_control.h)(0x55518457)
-I (Main\../Peripherals/i2c_control.h)(0x552630D0)
-I (Main\../bt_control.h)(0x557118AD)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55073496)
-I (Main\../buttons.h)(0x557233CB)
+I (Main\mpu_constants.h)(0x5573314A)
+I (Main\../Peripherals/Display.h)(0x55733110)
+I (Main\../Peripherals/Queue.h)(0x55727816)
+I (Main\../mpu_control.h)(0x5572EB6D)
+I (Main\../Peripherals/i2c_control.h)(0x55726D67)
+I (Main\../buttons.h)(0x5572AACB)
+I (Main\../timer.h)(0x557332D2)
 F (.\Peripherals\Cap_buttons.c)(0x551CB4A1)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\cap_buttons.o --omf_browse .\objects\cap_buttons.crf --depend .\objects\cap_buttons.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
@@ -27,10 +26,10 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
 I (Peripherals\Cap_Buttons.h)(0x5508A3B6)
-I (Peripherals\Display.h)(0x552F1D07)
-I (Peripherals\Queue.h)(0x55073496)
-F (.\Peripherals\Display.c)(0x554D4BCF)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\display.o --omf_browse .\objects\display.crf --depend .\objects\display.d)
-I (Peripherals\Display.h)(0x552F1D07)
+I (Peripherals\Display.h)(0x55733110)
+I (Peripherals\Queue.h)(0x55727816)
+F (.\Peripherals\Display.c)(0x55732AE8)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\display.o --omf_browse .\objects\display.crf --depend .\objects\display.d)
+I (Peripherals\Display.h)(0x55733110)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
@@ -38,15 +37,16 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
-I (Peripherals\Queue.h)(0x55073496)
-I (Peripherals\../Main/mpu_constants.h)(0x557233E7)
-I (Peripherals\i2c_control.h)(0x552630D0)
-I (Peripherals\../mpu_control.h)(0x55518457)
-F (.\Peripherals\i2c_control.c)(0x55518457)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\i2c_control.o --omf_browse .\objects\i2c_control.crf --depend .\objects\i2c_control.d)
-I (Peripherals\i2c_control.h)(0x552630D0)
+I (Peripherals\Queue.h)(0x55727816)
+I (Peripherals\../font.h)(0x55732D6B)
+I (Peripherals\../Main/mpu_constants.h)(0x5573314A)
+I (Peripherals\i2c_control.h)(0x55726D67)
+I (Peripherals\../mpu_control.h)(0x5572EB6D)
+F (.\Peripherals\i2c_control.c)(0x55726E2E)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\i2c_control.o --omf_browse .\objects\i2c_control.crf --depend .\objects\i2c_control.d)
+I (Peripherals\i2c_control.h)(0x55726D67)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
-I (Peripherals\../Main/mpu_constants.h)(0x557233E7)
-I (Peripherals\Queue.h)(0x55073496)
+I (Peripherals\../Main/mpu_constants.h)(0x5573314A)
+I (Peripherals\Queue.h)(0x55727816)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
@@ -54,18 +54,18 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
-F (.\Peripherals\Queue.c)(0x5507946D)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
+F (.\Peripherals\Queue.c)(0x5572786D)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
-I (Peripherals\Queue.h)(0x55073496)
-F (.\mpu_control.c)(0x557244BA)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\mpu_control.o --omf_browse .\objects\mpu_control.crf --depend .\objects\mpu_control.d)
+I (Peripherals\Queue.h)(0x55727816)
+F (.\mpu_control.c)(0x557339A6)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\mpu_control.o --omf_browse .\objects\mpu_control.crf --depend .\objects\mpu_control.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
-I (mpu_control.h)(0x55518457)
+I (mpu_control.h)(0x5572EB6D)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\i2c_control.h)(0x552630D0)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x557233E7)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55073496)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Display.h)(0x552F1D07)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x5573314A)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\i2c_control.h)(0x55726D67)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55727816)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Display.h)(0x55733110)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
@@ -75,7 +75,7 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.
 F (.\bt_control.c)(0x5571501C)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\bt_control.o --omf_browse .\objects\bt_control.crf --depend .\objects\bt_control.d)
 I (bt_control.h)(0x557118AD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55073496)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55727816)
 I (HCI_constants.h)(0x556FE5A8)
 I (hci_api.h)(0x55700667)
 I (bt_types.h)(0x557117D9)
@@ -87,15 +87,15 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x557233E7)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\i2c_control.h)(0x552630D0)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x5573314A)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\i2c_control.h)(0x55726D67)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
 I (ti_stupid_sp.h)(0x55713EAC)
 F (.\HCIAPI.h)(0x53C94D15)()
 F (.\HCITypes.h)(0x55656796)()
 F (.\uart_control.c)(0x55714365)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\uart_control.o --omf_browse .\objects\uart_control.crf --depend .\objects\uart_control.d)
 I (uart_control.h)(0x556FE5A8)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55073496)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Peripherals\Queue.h)(0x55727816)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
@@ -103,9 +103,19 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
-F (.\buttons.c)(0x557265BE)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\buttons.o --omf_browse .\objects\buttons.crf --depend .\objects\buttons.d)
+F (.\timer.c)(0x55733368)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
+I (timer.h)(0x557332D2)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x5573314A)
+I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
+I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
+F (.\buttons.c)(0x5572AB8F)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\buttons.o --omf_browse .\objects\buttons.crf --depend .\objects\buttons.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5476E210)
-I (buttons.h)(0x557233CB)
+I (buttons.h)(0x5572AACB)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5476E210)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h)(0x53FD04CA)
@@ -113,9 +123,9 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h)(0x53FFC59A)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h)(0x53FD04CA)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h)(0x54E24B0C)
-I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x557233E7)
-F (.\ti_stupid_sp.h)(0x55713EAC)()
-F (RTE\Device\STM32F373RB\startup_stm32f373xc.s)(0x55262EDF)(--cpu Cortex-M4.fp -g --apcs=interwork -I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include--pd "__UVISION_VERSION SETA 513" --pd "_RTE_ SETA 1" --pd "STM32F373xC SETA 1"--list .\listings\startup_stm32f373xc.lst --xref -o .\objects\startup_stm32f373xc.o --depend .\objects\startup_stm32f373xc.d)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\Main\mpu_constants.h)(0x5573314A)
+I (C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\timer.h)(0x557332D2)
+F (RTE\Device\STM32F373RB\startup_stm32f373xc.s)(0x5572FA84)(--cpu Cortex-M4.fp -g --apcs=interwork -I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include--pd "__UVISION_VERSION SETA 513" --pd "_RTE_ SETA 1" --pd "STM32F373xC SETA 1"--list .\listings\startup_stm32f373xc.lst --xref -o .\objects\startup_stm32f373xc.o --depend .\objects\startup_stm32f373xc.d)
 F (RTE\Device\STM32F373RB\system_stm32f3xx.c)(0x55260E82)(--c99 -c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-I C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F373xC-o .\objects\system_stm32f3xx.o --omf_browse .\objects\system_stm32f3xx.crf --depend .\objects\system_stm32f3xx.d)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f3xx.h)(0x54E24B0C)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\stm32f373xc.h)(0x54E24B0C)

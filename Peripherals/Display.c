@@ -1,11 +1,12 @@
 #include "Display.h"
+#include "../font.h"
 #include <stdint.h>
 #include "stm32f373xc.h"                  // Device header
 #include "../Main/mpu_constants.h"				// MPU general constants
 #include "i2c_control.h"	// header for MCU specific i2c constants
 #include "../mpu_control.h" // communication method
 Queue *displayQueue; 
-uint8_t display[8][128]; // copy of display RAM
+uint8_t display[DISPLAY_HEIGHT][DISPLAY_WIDTH]; // copy of display RAM
 
 // initialize the i2c interface
 void display_Init(void){
@@ -116,11 +117,16 @@ void display_Init(void){
 	// disable entire on
 	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
 	enQueue(displayQueue, DISPLAY_ON_NORMAL);
-	
+	/*
 	// DISPLAY_COM_DIR 64-0
-	//enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
-	//enQueue(displayQueue, DISPLAY_COM_DIR);
-	//
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_COM_DIR);
+	// Set com pin configuration
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_SET_COM_PINS);
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_SET_COM_PINS2 | DISPLAY_SET_COM_SEQUENTIAL);
+	*/
 	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
 	enQueue(displayQueue, DISPLAY_PRECHARGE_PERIOD);
 	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
@@ -152,13 +158,30 @@ void display_Init(void){
 	enQueue(displayQueue, SET_MEMADD_MODE);
 	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
 	enQueue(displayQueue, HORIZ_MEMADD_MODE);
-	//enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
-	//enQueue(displayQueue, SET_PAGEADD_START | HR_Y_START);
-	//enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
-	//enQueue(displayQueue, SET_COLADD_START0 | (LOW_NIBBLE & HR_X_START));
-	//enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
-	//enQueue(displayQueue, SET_COLADD_START1 | ((HIGH_NIBBLE & HR_X_START)>>4));
-	display_Communicate(4, 0,0);
+	
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, SET_COLADD);
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_COLADD_START);	
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_COLADD_END);
+	
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, SET_PAGE_ADDRESS);
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_PAGEADD_START);	
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, DISPLAY_PAGEADD_END);
+	/*
+	enQueue(displayQueue, SET_COLADD_START0 | (LOW_NIBBLE & HR_X_START));
+  enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	enQueue(displayQueue, SET_COLADD_START1 | ((HIGH_NIBBLE & HR_X_START)>>4));
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	
+	enQueue(displayQueue, SET_PAGEADD_START | HR_Y_START);
+	enQueue(displayQueue, DISPLAY_WRITE_COMMAND | DISPLAY_WRITE_MULTIPLE);
+	*/
+	display_Communicate(16, 0,0);
 	while(!queue_isEmpty(displayQueue)){
 		// wait for the startup sequence to finish
 	}
@@ -191,34 +214,33 @@ void display_Int(uint16_t value){
 	uint32_t delay = 500000;
 	uint8_t temp = 0x80;
 	while(divisor != 0){
+		/* Get the next digit in the number */
 		digit = value / divisor;
-		 //do each 8 bit column
-		for(i = 0; i < 12; i++){
-			display[HR_Y_START][HR_X_START+(index*12)+i] = FONT_BITMAP[digit*12+i];
+		/* Write the digit to local display ram copy */		
+		for(i = 0; i < FONT_WIDTH; i++){
+			display[HR_Y_START][(FONT_WIDTH * index) + i] = 
+											 FONT_BITMAP[digit + NUMBER_OFFSET][i];
 		}
-		/*temp = 0x80;
-		for(i = 0; i < 8; i++){
-			display[HR_Y_START][HR_X_START+(index*12)+i]  = (FONT_BITMAP[digit*12+7] & temp) 
-			+ ((FONT_BITMAP[digit*12+6] & temp) >> 1) + ((FONT_BITMAP[digit*12+5] & temp) >> 2)
-			+ ((FONT_BITMAP[digit*12+4] & temp)>>3) + ((FONT_BITMAP[digit*12+3] & temp)>>4) 
-			+ ((FONT_BITMAP[digit*12+2] & temp)>>5) + ((FONT_BITMAP[digit*12+1] & temp)>>6) 
-			+ ((FONT_BITMAP[digit*12+0] & temp)>>7);
-			
-			display[HR_Y_START+1][HR_X_START+(index*12)+i] =	(FONT_BITMAP[digit*12+11] & temp )
-			+ ((FONT_BITMAP[digit*12+10] & temp)>>1) + ((FONT_BITMAP[digit*12+9] & temp)>>2) 
-			+ ((FONT_BITMAP[digit*12+8] & temp)>>3);
-			temp = temp>>1;
-		}*/
-		value %= divisor;
+		value %= divisor; /* Update the current value */
 		divisor /= 10;
 		index++;
 	}
-	enQueue(displayQueue, 0x40);
-	for(i = 0; i < 128; i++){
+	enQueue(displayQueue, DISPLAY_WRITE_DATA);
+	for(i = DISPLAY_WIDTH; i > 0; i--){
 		enQueue(displayQueue, display[HR_Y_START][i]);
 	}
 	// write 129 bytes to display
-	display_Communicate(129, 0,1);
+	display_Communicate(DISPLAY_WIDTH+1, 0,1);
+}
+
+void display_Page(uint8_t display_page){
+	int i;
+	enQueue(displayQueue, DISPLAY_WRITE_DATA); /* Sending data dump */
+	for(i = 0; i < DISPLAY_WIDTH; i++){	/* Enqueue all the data (this row) */
+		enQueue(displayQueue, display[display_page][i]);
+	}
+	display_Communicate(DISPLAY_WIDTH + 1, 0,1); /* Call com functions */
+	
 }
 // Start i2c communication and interrupt after each byte transmition
 void display_Communicate(uint16_t numBytes, uint16_t readWrite, uint16_t dataCommand){

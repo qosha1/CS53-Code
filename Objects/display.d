@@ -8,6 +8,7 @@
 .\objects\display.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h
 .\objects\display.o: C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h
 .\objects\display.o: Peripherals\Queue.h
+.\objects\display.o: Peripherals\../font.h
 .\objects\display.o: Peripherals\../Main/mpu_constants.h
 .\objects\display.o: Peripherals\i2c_control.h
 .\objects\display.o: Peripherals\Queue.h

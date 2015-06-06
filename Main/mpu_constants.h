@@ -62,4 +62,9 @@ typedef enum
 	
 #define BT_USART 		USART1
 
+
+#define MS_PER_SAMPLE			1000
+
+
+
 #endif // MPU_CONSTANTS

@@ -1,7 +1,9 @@
-#include <stdint.h>
-
 #ifndef MPU_REGISTERS_H
 #define MPU_REGISTERS_H
+
+
+#include <stdint.h>
+#include "../Main/mpu_constants.h"
 
 /* Hardware registers needed by driver. */
 struct gyro_reg_s {
@@ -52,6 +54,7 @@ struct gyro_reg_s {
 #endif
 };
 typedef struct  {
+		unsigned char rate_div;			/* Divider for gyro sample rate */
     unsigned char lpf;					/* Low pass filter for Accel and gyro*/
     unsigned char user_ctrl;		/* Enable and reset FIFO, I2C_MASTER */
     unsigned char fifo_en;			/* Enable what gets sent to FIFO */
@@ -94,7 +97,8 @@ typedef struct {
 #define STARTUP_GYROCFG			(0x00)					// use all gyros at small range
 #define STARTUP_ACCELCFG		(0x00)					// use all accels at small range
 #define STARTUP_INTENABLE		BIT_DATA_RDY_EN | BIT_FIFO_OVERFLOW	// interrupt on daty ready
-#define STARTUP_INTPINCFG		(0xA0)					// active low interrupt and wait till cleared
+#define STARTUP_INTPINCFG		(0x80)					// active low interrupt and wait till cleared
+#define STARTUP_RATE_DIV		(0X07)					// sample rate divider for gyro & accel at 1khx
 
 #define BIT_I2C_MST_VDDIO   (0x80)
 #define BIT_I2C_MASTER_EN		(0x20)
@@ -155,10 +159,11 @@ extern struct gyro_reg_s *mpu_regs;
 extern const struct gyro_reg_s reg;
 extern const struct hw_s hw;
 
-mpu_data_s * get_Data_Packet();
 void display_Register(uint16_t reg, uint16_t value);
 void mpu_init(void);
 void configure_Mpu(mpu_setup_s *config);
+mpu_data_s * get_Data_Packet();
+boolean data_Packet_Ready();
 void Delay(uint32_t dlyTicks);
 extern void EXTI9_5_IRQHandler(void);
 
