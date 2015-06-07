@@ -1,3 +1,26 @@
+/*****< i2c_control.c >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*   i2c_control.c   -        This file implements the I2C communication for  */
+/*                            the motion procesor. It also initializes the in*/
+/*                            pin to the motion processor. Once the comm data */
+/*                            has been sent/received, this file hands it off  */
+/*                            to that dedicated processor.                    */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/01/15  Q. Osha        Initial revision.                               */
+/*   03/16/15  Q. Osha        Fix GPIO initialization issues                  */
+/*   03/19/15  Q. Osha        Change ISR read sequence in I2C interrupt hdlr  */
+/*   06/05/15  Q. Osha        Fix timing issues.                              */
+/******************************************************************************/
+
 #include "i2c_control.h"	// header for MCU specific i2c constants
 #include "stm32f373xc.h" // Device header
 #include <stdint.h> 			// 

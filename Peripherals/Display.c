@@ -1,3 +1,27 @@
+/*****< display.c >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  display.c   -       This display file overcomes the incredible odds       */
+/*                      against it by implementing a simple and clean interface*/
+/*                      to the rest of the project. A chinese off brand display,*/
+/*                      this device is poorly documented and has very unclear */
+/*                      initialization instructions. Below is one sequence    */
+/*                      that has proven to be repeatedly successful.          */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/17/15  Q. Osha        Initial revision.                               */
+/*   03/16/15  Q. Osha        Reached turn-on                                 */
+/*   03/19/15  Q. Osha        Displayed numbers to screen (sideways)          */
+/*   06/05/15  Q. Osha        Displayed numbers and letters(correct dir)      */
+/******************************************************************************/
+
 #include "Display.h"
 #include "../font.h"
 #include <stdint.h>

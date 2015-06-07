@@ -12,7 +12,9 @@
 /*   --------  -----------    ------------------------------------------------*/
 /*   08/25/00  D. Lange       Initial creation.                               */
 /*   12/07/07  D. Mason       Changes for BT 2.1                              */
+/*   06/01/15  Q. Osha        Removed excess features                         */
 /******************************************************************************/
+
 #ifndef _HCI_CONSTANTSH
 #define _HCI_CONSTANTSH
 

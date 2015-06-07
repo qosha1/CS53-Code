@@ -1,6 +1,25 @@
 #ifndef __HCI_APIH__
 #define __HCI_APIH__
 
+/*****< hciapi.h >*************************************************************/
+/*      Copyright 2000 - 2014 Stonestreet One.                                */
+/*      All Rights Reserved.                                                  */
+/*                                                                            */
+/*  HCIAPI - Stonestreet One Bluetooth Stack HCI API Type Definitions,        */
+/*           Constants, and Prototypes.                                       */
+/*                                                                            */
+/*  Author:  Damon Lange                                                      */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   09/11/00  D. Lange       Initial creation.                               */
+/*   12/07/07  D. Mason       Changes for BT 2.1                              */
+/*   06/01/15  Q. Osha        Add specific baseband controller commands,      */
+ /*                             removed a lot.                                */
+/******************************************************************************/
+
 #include "HCI_constants.h"  /* HCI data type constants */
 #include "bt_types.h"
 

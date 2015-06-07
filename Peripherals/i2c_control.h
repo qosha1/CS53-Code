@@ -1,4 +1,21 @@
-/* Include file for MCU based i2c constants and functions */
+/*****< i2c_control.h >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*   i2c_control.h   -        This header file defines a few initialization   */
+/*                            structs that are helpful when using the I2C     */
+/*                            peripheral. Helpful constants are also aboud.   */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/01/15  Q. Osha        Initial revision.                               */
+/*   03/16/15  Q. Osha        Add init structures                             */
+/******************************************************************************/
 
 #include <stdint.h>							// 
 #include "../Main/mpu_constants.h"							//mpu specific constants 

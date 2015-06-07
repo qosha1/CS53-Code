@@ -1,11 +1,28 @@
-/* File implements methods for the mpu motion controller */
-#include <stdlib.h>					// include c standard
-#include "mpu_control.h"								// file header
+/*****< mpu_control.c >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  Mpu_control.c -       This file implements methods for communicating with */
+/*                        the invensense motion controller                    */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/15/15  Q. Osha        Initial revision.                               */
+/*   04/01/15  Q. Osha        Add struct representations of register array    */
+/*   05/20/15  Q. Osha        Fix timing and interrupt issues with EXTI       */
+/******************************************************************************/
+#include <stdlib.h>                     // include c standard
+#include "mpu_control.h"				// file header
 #include "../Peripherals/i2c_control.h" // communication method
-#include "../Peripherals/Display.h"
-#include "../timer.h"
+#include "../Peripherals/Display.h"     // display functions
+#include "../timer.h"                   // timer helpers for data processing
 
-
+// Struct for the control registers on the mpu-9150
 struct gyro_reg_s *mpu_regs;
 const struct gyro_reg_s reg = {
     .who_am_i       = 0x75,
@@ -275,10 +292,6 @@ boolean data_Packet_Ready(){
 		return true;
 	}
 	return false;
-}
-
-void display_Register(uint16_t reg, uint16_t value){
-
 }
 
 void display_Motion_Data(mpu_data_s *data){

@@ -1,3 +1,25 @@
+/*****< uart_control.c >*******************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  uart_control.c - This file contains functions that allow for simple       */
+/*                      simple implementation of the ARM USART peripherals.   */
+/*                      using the typical configuration with the ability to   */
+/*                      update the baud rate and other parameters using separate
+/*                      functions allows for quick implementations.           */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   date_edi  Q. Osha        Initial revision.                               */
+/*   date_edi  Q. Osha        edits_made_to_file                              */
+/******************************************************************************/
+
+
 #include "uart_control.h" // Uart specific header file
 #include "stm32f373xc.h" // Device headers
 

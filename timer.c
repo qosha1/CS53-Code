@@ -1,3 +1,25 @@
+/*****< timer.c >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  time.c   -          This file uses the onboard Tim15 of the STM32F3 series*/
+/*                      to control the data acquisition process of the motino */
+/*                      sensor. The functions assume a certain configuration  */
+/*                      for the timer and allow only for you to modify the    */
+/*                      number of milliseconds per timer interrupt           */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   02/25/15  Q. Osha        Initial revision.                               */
+/*   02/26/15  Q. Osha        Add finished flag                               */
+/******************************************************************************/
+
+
 #include "timer.h"
 #include <stdint.h>
 #include "stm32f373xc.h"                  // Device header

@@ -1,3 +1,25 @@
+/*****< hci_commands.h >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  hci_commands.h - This file contains stucture definitions for the commands */
+/*                   in the HCI transport layer that are implemented. This is */
+/*                   by no means a comprehensive list nor is it supposed to be*/
+/*                   Each command, its parameters and its responses is detailed*/
+/*                   in the Bluetooht v4.0 specification.                     */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   05/14/15  Q. Osha        Initial revision (in hciapi file)               */
+/*   06/02/15  Q. Osha        Moved these structures to own file              */
+/******************************************************************************/
+
+
 #ifndef __hcicommands__
 #define __hcicommands__
 

@@ -1,10 +1,29 @@
+/*****< buttons.c >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  buttons.c   -       This file implements the capacitive touch buttons     */
+/*                      using the touch sensing controller on board the STM32.*/
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   05/25/15  Q. Osha        Initial revision.                               */
+/*   04/01/15  Q. Osha        Add basic implemenation and fix errors          */
+/*   06/05/15  Q. Osha        Clean up code and alter sensor settings         */
+/******************************************************************************/
 
 #include <stdlib.h>
 #include "buttons.h"
-#include "stm32f373xc.h" // Device header
+#include "stm32f373xc.h"            // Device header
 #include "../Main/mpu_constants.h"
-#include "../timer.h"										// Timer init and control functions
+#include "../timer.h"               // Timer init and control functions
 
+/* All the buttons in the analog sensing group */
 const struct _Button_Group buttons = 
 {
 	.button1 = CAP_BUTTON1,
@@ -12,6 +31,7 @@ const struct _Button_Group buttons =
 	.button3 = CAP_BUTTON3,
 	.button4 = CAP_BUTTON4,
 };
+/* The button that is to be used as the measuring (comparator) capacitor */
 const uint8_t channel_button[4] = 
 {
 	CAP_BUTTON2,

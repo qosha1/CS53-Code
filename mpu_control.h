@@ -1,6 +1,26 @@
+/*****< mpu_control.h >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  Mpu_control.h -       This file implements helper methods and structures  */
+/*                        for its c file that handles processing of the motion*/
+/*                        data. It is more efficient to keep local copies of  */
+/*                        register values than to read the value from the chip*/
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/15/15  Q. Osha        Initial revision.                               */
+/*   04/01/15  Q. Osha        Add struct representations of register array    */
+/*   06/05/15  Q. Osha        Update function prototypes. Add some constants  */
+/******************************************************************************/
+
 #ifndef MPU_REGISTERS_H
 #define MPU_REGISTERS_H
-
 
 #include <stdint.h>
 #include "../Main/mpu_constants.h"

@@ -1,3 +1,20 @@
+/*****< display.h >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  display.h   -       This header keeps track of the different command codes*/
+/*                      and display specific constants.                       */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/17/15  Q. Osha        Initial revision.                               */
+/*   06/05/15  Q. Osha        Added command for horizontal addressing. 
+/******************************************************************************/
 
 #ifndef _display_
 #define _display_

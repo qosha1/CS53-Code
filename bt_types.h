@@ -1,3 +1,23 @@
+/*****< bt_types.h >***********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  bt_types.h - This file contains simple data types that are convenient when*/
+/*               handling bluetooth HCI commands. Often unaligned, it is      */
+/*               helpful to store each byte separately in specific datatypes. */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   05/15/15  Q. Osha        Initial revision.                               */
+/*   05/29/15  Q. Osha        Add LAP AND LINK types                          */
+/******************************************************************************/
+
+
 #ifndef __bt_types__
 #define __bt_types__
 

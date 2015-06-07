@@ -6,11 +6,88 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		442655011B24C3090003321B /* ti_stupid_sp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ti_stupid_sp.h; path = ../ti_stupid_sp.h; sourceTree = "<group>"; };
+		442655021B24C3310003321B /* buttons.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = buttons.c; path = ../buttons.c; sourceTree = "<group>"; };
+		442655031B24C3310003321B /* buttons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = buttons.h; path = ../buttons.h; sourceTree = "<group>"; };
+		442655041B24C3310003321B /* font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = font.h; path = ../font.h; sourceTree = "<group>"; };
+		442655051B24C3310003321B /* timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = timer.c; path = ../timer.c; sourceTree = "<group>"; };
+		442655061B24C3310003321B /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = timer.h; path = ../timer.h; sourceTree = "<group>"; };
+		447676DF1B1F05BC001FAF7D /* hci_api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hci_api.h; path = ../hci_api.h; sourceTree = "<group>"; };
+		447676E01B1F05BC001FAF7D /* bt_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bt_types.h; path = ../bt_types.h; sourceTree = "<group>"; };
+		447676E11B1F05BC001FAF7D /* bt_control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = bt_control.c; path = ../bt_control.c; sourceTree = "<group>"; };
+		447676E21B1F05BC001FAF7D /* hcicommands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hcicommands.h; path = ../hcicommands.h; sourceTree = "<group>"; };
+		447676E31B1F05BC001FAF7D /* bt_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bt_control.h; path = ../bt_control.h; sourceTree = "<group>"; };
+		447676E41B1F05BC001FAF7D /* uart_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = uart_control.h; path = ../uart_control.h; sourceTree = "<group>"; };
+		447676E51B1F05BC001FAF7D /* uart_control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = uart_control.c; path = ../uart_control.c; sourceTree = "<group>"; };
+		447676E61B1F05BC001FAF7D /* HCI_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HCI_Constants.h; path = ../HCI_Constants.h; sourceTree = "<group>"; wrapsLines = 0; };
+		447676EA1B1F05BC001FAF7D /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		447676EB1B1F05BC001FAF7D /* mpu_constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mpu_constants.h; sourceTree = "<group>"; };
+		447676EC1B1F05BC001FAF7D /* mpu_control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mpu_control.c; path = ../mpu_control.c; sourceTree = "<group>"; };
+		447676ED1B1F05BC001FAF7D /* mpu_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mpu_control.h; path = ../mpu_control.h; sourceTree = "<group>"; };
+		447676F71B1F05BC001FAF7D /* Display.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Display.c; sourceTree = "<group>"; };
+		447676F81B1F05BC001FAF7D /* Display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Display.h; sourceTree = "<group>"; };
+		447677011B1F05BC001FAF7D /* i2c_control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = i2c_control.c; sourceTree = "<group>"; };
+		447677021B1F05BC001FAF7D /* i2c_control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = i2c_control.h; sourceTree = "<group>"; };
+		4476770B1B1F05BC001FAF7D /* Queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Queue.c; sourceTree = "<group>"; };
+		4476770C1B1F05BC001FAF7D /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		447676D81B1F0564001FAF7D = {
 			isa = PBXGroup;
 			children = (
+				447677111B1F06F1001FAF7D /* Bluetooth */,
+				447676E41B1F05BC001FAF7D /* uart_control.h */,
+				447676E51B1F05BC001FAF7D /* uart_control.c */,
+				447676E91B1F05BC001FAF7D /* Main */,
+				447676EC1B1F05BC001FAF7D /* mpu_control.c */,
+				447676ED1B1F05BC001FAF7D /* mpu_control.h */,
+				442655021B24C3310003321B /* buttons.c */,
+				442655031B24C3310003321B /* buttons.h */,
+				442655041B24C3310003321B /* font.h */,
+				442655051B24C3310003321B /* timer.c */,
+				442655061B24C3310003321B /* timer.h */,
+				447676EF1B1F05BC001FAF7D /* Peripherals */,
 			);
+			sourceTree = "<group>";
+		};
+		447676E91B1F05BC001FAF7D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				447676EA1B1F05BC001FAF7D /* main.c */,
+				447676EB1B1F05BC001FAF7D /* mpu_constants.h */,
+			);
+			name = Main;
+			path = ../Main;
+			sourceTree = "<group>";
+		};
+		447676EF1B1F05BC001FAF7D /* Peripherals */ = {
+			isa = PBXGroup;
+			children = (
+				447676F71B1F05BC001FAF7D /* Display.c */,
+				447676F81B1F05BC001FAF7D /* Display.h */,
+				447677011B1F05BC001FAF7D /* i2c_control.c */,
+				447677021B1F05BC001FAF7D /* i2c_control.h */,
+				4476770B1B1F05BC001FAF7D /* Queue.c */,
+				4476770C1B1F05BC001FAF7D /* Queue.h */,
+			);
+			name = Peripherals;
+			path = ../Peripherals;
+			sourceTree = "<group>";
+		};
+		447677111B1F06F1001FAF7D /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				442655011B24C3090003321B /* ti_stupid_sp.h */,
+				447676E11B1F05BC001FAF7D /* bt_control.c */,
+				447676E31B1F05BC001FAF7D /* bt_control.h */,
+				447676E01B1F05BC001FAF7D /* bt_types.h */,
+				447676E21B1F05BC001FAF7D /* hcicommands.h */,
+				447676E61B1F05BC001FAF7D /* HCI_Constants.h */,
+				447676DF1B1F05BC001FAF7D /* hci_api.h */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

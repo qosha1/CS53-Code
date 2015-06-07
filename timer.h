@@ -1,3 +1,21 @@
+/*****< timer.h >********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  timer.h  -          This file defines constants for the timer.c file. It  */
+/*                      also allows for outside access the the timer functions*/
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   02/25/15  Q. Osha        Initial revision.                               */
+/******************************************************************************/
+
+
 #ifndef _timer_
 #define _timer_
 

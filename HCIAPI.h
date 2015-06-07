@@ -13,6 +13,7 @@
 /*   --------  -----------    ------------------------------------------------*/
 /*   09/11/00  D. Lange       Initial creation.                               */
 /*   12/07/07  D. Mason       Changes for BT 2.1                              */
+/*   06/01/15  Q. Osha        Add specific baseband controller commands       */
 /******************************************************************************/
 #ifndef __HCIAPIH__
 #define __HCIAPIH__

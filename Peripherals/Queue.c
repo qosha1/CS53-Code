@@ -1,3 +1,24 @@
+/*****< queue.c >**************************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*   queue.c   -        This file implements a simple but powerful queue      */
+/*                      structure. It is a light weight option for building a */
+/*                      fifo and is especially useful for the i2c and USART   */
+/*                      interrupt functions. All the interrupt functions use  */
+/*                      queues to quickly grab incoming data for later        */
+ /*                     processing.                                           */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   02/01/15  Q. Osha        Initial revision.                               */
+/*   06/05/15  Q. Osha        Add currentSize parameter                       */
+/******************************************************************************/
 
 #include <stdlib.h>
 #include "Queue.h"

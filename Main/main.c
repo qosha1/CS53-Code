@@ -1,6 +1,26 @@
-/*----------------------------------------------------------------------------
- * 'main' function template
- *---------------------------------------------------------------------------*/
+/*****< main.c >***************************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  Main.c -        This file is the main() call made by the low level init   */
+/*                  code. The user inteface is mostly contained within this   */
+/*                  file. It implements a very simple FSM that moves to states*/
+/*                  based on the current state and the user input using the   */
+/*                  buttons. */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/15/15  Q. Osha        Initial revision.                               */
+/*   04/10/15  Q. Osha        Add display init code                           */
+/*   05/05/15  Q. Osha        Add motion control init code                    */
+/*   05/08/15  Q. Osha        Add bluetooth control init code                 */
+/*   06/04/15  Q. Osha        Remove bluetooth code due to hardware issues    */
+/******************************************************************************/
 
 #include <stdlib.h>
 #include "stm32f3xx.h"                // Device header

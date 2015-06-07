@@ -1,3 +1,20 @@
+/*****< mpu_constants.h >******************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  Mpu_constants.h -       This file contains constants that are specific to */
+/*                          the custom implemented hardware, such as the      */
+/*                          GPIO ports that are hooked up to various peripherals.*/
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   03/15/15  Q. Osha        Initial revision.                               */
+/******************************************************************************/
 
 #ifndef MPU_CONSTANTS
 #define MPU_CONSTANTS
@@ -9,7 +26,7 @@ typedef enum
 	false = 0
 	}boolean;
 
-#define __INLINE         __inline                                   /*!< inline keyword for ARM Compiler       */
+#define __INLINE         __inline            /*!< inline keyword for ARM Compiler       */
 #define __STATIC_INLINE  static __inline
 
 				/* GPIO pin definitions */ 
@@ -55,7 +72,7 @@ typedef enum
   DISPLAY_SDA  = 7
 }PF_Block;
 
-/*							 Alternate function declarations				*/ 
+/*	Alternate function declarations				*/
 
 #define BT_USART_AF 		7
 #define CAP_BUTTON_AF		3

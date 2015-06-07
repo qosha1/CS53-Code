@@ -1,3 +1,23 @@
+/*****< font.h >***************************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  font.h          - This file contains a home-brewed 8x8 bit map ASCII      */
+/*                    charater representation. Because of the nature of the   */
+/*                    implemented display, the characters are transposed and  */
+/*                    rotated as compared with a normal ASCII bitmap.         */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   06/03/15  Q. Osha        Initial revision.                               */
+/*   06/05/15  Q. Osha        Rotate and transpose entire list                */
+/******************************************************************************/
+
 #include <stdint.h>
 
 #define FONT_WIDTH								8

@@ -1,4 +1,26 @@
-#include <stdint.h> 			// 
+/*****< bt_control.h >***********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  bt_control.c - This file contains the constants and prototypes relavent to*/
+/*                  the bluetooth controlling software.                       */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   05/10/15  Q. Osha        Initial revision.                               */
+/*   05/25/15  Q. Osha        Separate UART functions from the bluetooth 	  */
+/*								functions. 		                              */
+/*	 06/01/15  Q. Osha		  Add further functionality for bluetooth, init   */
+/*								functions. 									  */
+/******************************************************************************/
+
+
+#include <stdint.h> 			//
 #include "../Peripherals/Queue.h"	// Queue functions
 
 #define BT_QUEUE_LENGTH						((uint32_t) 0x80)

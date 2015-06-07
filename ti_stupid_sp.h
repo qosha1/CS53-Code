@@ -1,7 +1,24 @@
+/*****< ti_stupid_sp.h >***********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  ti_stupid_sp.h - This file contains a firmware patch for the TI bluetooth */
+/*   controller. It needs to be batch loaded on startup for correct operation.*/
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   06/01/15  Q. Osha        Initial revision.                               */
+/******************************************************************************/
+
+
+
 static unsigned char BasePatch[] =
-
 {
-
 0x01, 0x36, 0xFF, 0x04, 0x00, 0xC2, 0x01, 0x00, 0x01, 0x37, 0xFE, 0x02, 0x06, 0x0F, 0x01, 0x05, 
 0xFF, 0xFF, 0xA0, 0x62, 0x08, 0x00, 0xFA, 0x06, 0x0F, 0x3D, 0x5D, 0xFB, 0x01, 0x00, 0x1F, 0x00, 
 0x00, 0x05, 0x00, 0x05, 0xC0, 0x03, 0xC0, 0x1E, 0x38, 0x05, 0x00, 0x05, 0xC0, 0x01, 0x40, 0x1F, 

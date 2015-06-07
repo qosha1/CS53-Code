@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="88">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="CS53-Code">
+      <df name="Main">
+        <in>main.c</in>
+        <in>mpu_constants.h</in>
+      </df>
+      <df name="Peripherals">
+        <in>AnalogMeasure.h</in>
+        <in>Cap_buttons.c</in>
+        <in>Cap_buttons.h</in>
+        <in>Display.c</in>
+        <in>Display.h</in>
+        <in>Queue.c</in>
+        <in>Queue.h</in>
+        <in>accel_auto_cal.h</in>
+        <in>analog_timer.c</in>
+        <in>analog_timer.h</in>
+        <in>compass_vec_cal.h</in>
+        <in>fast_no_motion.h</in>
+        <in>fusion_9axis.h</in>
+        <in>gpio.c</in>
+        <in>gpio.h</in>
+        <in>gyro_tc.h</in>
+        <in>heading_from_gyro.h</in>
+        <in>i2c.c</in>
+        <in>i2c.h</in>
+        <in>i2c_control.c</in>
+        <in>i2c_control.h</in>
+        <in>inv_math.h</in>
+        <in>invensense_adv.h</in>
+        <in>mag_disturb.h</in>
+        <in>motion_no_motion.h</in>
+        <in>no_gyro_fusion.h</in>
+        <in>quaternion_supervisor.h</in>
+        <in>stm32f4xx_i2c.c</in>
+        <in>stm32f4xx_i2c.h</in>
+        <in>stm32f4xx_rcc.h</in>
+      </df>
+      <df name="RTE">
+        <df name="CMSIS">
+          <in>RTX_Conf_CM.c</in>
+        </df>
+        <df name="Device">
+          <df name="STM32F373RB">
+            <in>startup_stm32f373xc.s</in>
+            <in>system_stm32f3xx.c</in>
+          </df>
+        </df>
+        <df name="Graphics">
+          <in>GUIConf.c</in>
+          <in>LCDConf.c</in>
+        </df>
+        <df name="USB">
+          <in>USBD_Config_0.c</in>
+          <in>USBD_Config_ADC_0.h</in>
+          <in>USBD_Config_CDC_0.h</in>
+          <in>USBD_Config_CustomClass_0.h</in>
+          <in>USBD_Config_HID_0.h</in>
+          <in>USBD_Config_MSC_0.h</in>
+          <in>USBH_Config_0.c</in>
+          <in>USBH_Config_CDC.h</in>
+          <in>USBH_Config_CustomClass.h</in>
+          <in>USBH_Config_HID.h</in>
+          <in>USBH_Config_MSC.h</in>
+        </df>
+        <in>RTE_Components.h</in>
+      </df>
+      <in>bt_control.c</in>
+      <in>bt_control.h</in>
+      <in>mpu.h</in>
+      <in>mpu_control.c</in>
+      <in>mpu_control.h</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="Main/main.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Main/mpu_constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/AnalogMeasure.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/Cap_buttons.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/Cap_buttons.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/Display.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/Display.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/Queue.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/Queue.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/accel_auto_cal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/analog_timer.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/analog_timer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/compass_vec_cal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/fast_no_motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/fusion_9axis.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/gpio.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/gpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/gyro_tc.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/heading_from_gyro.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/i2c.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/i2c.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/i2c_control.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/i2c_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/inv_math.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/invensense_adv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/mag_disturb.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/motion_no_motion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/no_gyro_fusion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/quaternion_supervisor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Peripherals/stm32f4xx_i2c.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Peripherals/stm32f4xx_i2c.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Peripherals/stm32f4xx_rcc.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/CMSIS/RTX_Conf_CM.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/Device/STM32F373RB/startup_stm32f373xc.s"
+            ex="false"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="RTE/Device/STM32F373RB/system_stm32f3xx.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/Graphics/GUIConf.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/Graphics/LCDConf.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/RTE_Components.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBD_Config_0.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/USB/USBD_Config_ADC_0.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBD_Config_CDC_0.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBD_Config_CustomClass_0.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="RTE/USB/USBD_Config_HID_0.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBD_Config_MSC_0.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBH_Config_0.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="RTE/USB/USBH_Config_CDC.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBH_Config_CustomClass.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBH_Config_HID.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RTE/USB/USBH_Config_MSC.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bt_control.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="bt_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="CS53-Code/RTE/USB">
+        <cTool>
+          <incDir>
+            <pElem>RTE</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <item path="mpu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="mpu_control.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="mpu_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

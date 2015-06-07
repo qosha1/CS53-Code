@@ -1,3 +1,26 @@
+/*****< bt_control.c >***********************************************************/
+/*      California Institute of Technology 									  */
+/*		EECS53 project 2015   		                          			      */
+/*      Portable fitness  tracker                                             */
+/*                                                                            */
+/*  bt_control.c - This file contains functions that control the bluetooth 	  */
+/*  				controller-to-host HCI communication. It is the host side */
+/*					initialization and control functionality, including the   */
+/*					GPIOs.					               					  */
+/*                                                                            */
+/*  Author:  Quinn Osha                                                       */
+/*                                                                            */
+/*** MODIFICATION HISTORY *****************************************************/
+/*                                                                            */
+/*   mm/dd/yy  F. Lastname    Description of Modification                     */
+/*   --------  -----------    ------------------------------------------------*/
+/*   05/10/15  Q. Osha        Initial revision.                               */
+/*   05/25/15  Q. Osha        Separate UART functions from the bluetooth 	  */
+/*								functions. 		                              */
+/*	 06/01/15  Q. Osha		  Add further functionality for bluetooth, init   */
+/*								functions. 									  */
+/******************************************************************************/
+
 
 #include "bt_control.h"   // bluetooth specific constants
 #include "HCI_constants.h" //
@@ -9,10 +32,10 @@
 #include "../Peripherals/i2c_control.h"
 #include <stdlib.h>
 #include "ti_stupid_sp.h" //Need to include TI's incredibly stupid (16KB!) service
-													//pack to even make the bluetooth chip turn on. No, if 
-													// you were wondering, its not mentioned anywhere in the
-													// datasheet. Instead you must search through their Wiki
-													// page to finally find that it is a requirement. 
+                        //pack to even make the bluetooth chip turn on. No, if
+                        // you were wondering, its not mentioned anywhere in the
+                        // datasheet. Instead you must search through their Wiki
+                        // page to finally find that it is a requirement.
 													
 Queue *btTxQueue; // Queues for handling input/output of data to controller
 Queue *btRxQueue;
@@ -27,8 +50,18 @@ uint8_t set_Simple_Pairing(void);
 void start_Bt_Inquiry(HCI_Event_Data_t *event_response);
 void fix_TIs_Stupid_Mistakes();
 
+
+
+/*  Function: bt_Init()
+ /**
+ * @brief: This function initializes the GPIOs used for communication with the 
+ *          bluetooth controller. The USART pins are configured and set to 
+ *          the appropriate alternate functions.
+ *
+ * @param: none
+ * @retval: none
+ */
 void bt_Init(){
-	
 	RCC->AHBENR	|= RCC_AHBENR_GPIOAEN; 			/* Enable GPIOA clock*/
 	// Enable I2C clocks 
 	RCC->APB2ENR   |= RCC_APB2ENR_USART1EN;  	/* Enable USART1 clock*/
@@ -38,17 +71,10 @@ void bt_Init(){
 	GPIOA->AFR[1]  |= (((uint32_t) BT_USART_AF) << 4 * (BT_HCI_TX % 8));// alternate function setup
 	GPIOA->AFR[1]  |= (((uint32_t) BT_USART_AF) << 4 * (BT_HCI_CTS % 8));// alternate function setup
 	GPIOA->AFR[1]  |= (((uint32_t) BT_USART_AF) << 4 * (BT_HCI_RTS % 8));// alternate function setup
-	
-	//GPIOA->OTYPER  |= (1UL << 1*BT_HCI_RX);		//  open drain
-	//GPIOA->OTYPER  |= (1UL << 1*BT_HCI_TX);		//  open drain
-	//GPIOA->OTYPER  |= (1UL << 1*BT_HCI_CTS);	//  open drain
-	//GPIOA->OTYPER  |= (1UL << 1*BT_HCI_RTS);	//  open drain
 
-	//GPIOA->PUPDR  |= (1UL << 2*BT_HCI_RTS);	//  pull up
 	GPIOA->PUPDR  |= (1UL << 2*BT_HCI_TX);		//  pull up
 	GPIOA->PUPDR  |= (1UL << 2*BT_HCI_RTS);	//  pull up
-	//GPIOA->PUPDR  |= (1UL << 2*BT_HCI_RX);		//  pull up
- 	 	
+    
 	GPIOA->OSPEEDR |= (3UL << 2*BT_HCI_RX);		//  high speed
 	GPIOA->OSPEEDR |= (3UL << 2*BT_HCI_TX);		//  high speed
 	GPIOA->OSPEEDR |= (3UL << 2*BT_HCI_CTS);	//  high speed
@@ -61,8 +87,8 @@ void bt_Init(){
 
 	//Bluetooth shutdown output
 	GPIOA->MODER    |=  (1UL << 2*BT_SHUTD)   ;   /* output             */
-  GPIOA->OSPEEDR  &= ~((3UL << 2*BT_SHUTD)  );  /* Low Speed          */
-  GPIOA->OTYPER   |=  (1UL << 1*BT_SHUTD);
+    GPIOA->OSPEEDR  &= ~((3UL << 2*BT_SHUTD)  );  /* Low Speed          */
+    GPIOA->OTYPER   |=  (1UL << 1*BT_SHUTD);
 	GPIOA->PUPDR    |=  (1UL << 2*BT_SHUTD)   ;   /* OD, pullup         */
 	
 		/* Setup the queues for data transfer */	
@@ -82,25 +108,29 @@ void bt_Init(){
 }
 
 
-/* Bt controller defaults:
-  bit rate: 115.2 kbps
-	8 bits
-	1 stop bit
-	No parity bit
-*/
+
+
+/*
+ /**
+ * @brief   This function initializes specific attributes of the external TI 
+ *          Bluetooth controller. The controller starts at a low baud rate and 
+ *          it is suggested to increase it after boot up.
+ *
+ *          Bt controller defaults:
+ *              bit rate: 115.2 kbps
+ *              8 bits
+ *              1 stop bit
+ *              No parity bit
+ *
+ * @param   none
+ * @retval  none
+ */
 void init_Bt_Controller(){
 	// Reset baud rate
 	// 
 	uint8_t error;
 	uint8_t event_byte;
 	uint8_t event_value;
-	/*HCI_Set_Mws_Transport_Layer_Command_t *set_baud_command = malloc(HCI_SET_MWS_TRANSPORT_LAYER_COMMAND_SIZE);
-	set_baud_command->HCI_Command_Header.Command_OpCode = HCI_COMMAND_OPCODE_SET_MWS_TRANSPORT_LAYER;
-	set_baud_command->HCI_Command_Header.Parameter_Total_Length = 
-									HCI_SET_MWS_TRANSPORT_LAYER_COMMAND_SIZE -  HCI_COMMAND_HEADER_SIZE;
-	set_baud_command->From_Mws_Baud_Rate = BT_BAUD_RATE;
-	set_baud_command->To_Mws_Baud_Rate 	= BT_BAUD_RATE;
-	*/
 	HCI_Vs_Set_Baud_Command_t *set_baud_command = malloc(HCI_VS_SET_BAUD_COMMAND_SIZE);
 	set_baud_command->HCI_Command_Header.Command_OpCode = HCI_VS_SET_BAUD_OPCODE;
 	set_baud_command->HCI_Command_Header.Parameter_Total_Length = 4;
@@ -112,8 +142,6 @@ void init_Bt_Controller(){
 		send_Data(BT_USART);
 	}
 	HCI_Event_Data_t *hci_response = malloc(HCI_EVENT_DATA_SIZE);
-	//HCI_Event_Packet_Header_t *command_response = malloc(HCI_EVENT_PACKET_HEADER_SIZE);
-	//command_response->HCIPacketData = malloc(HCI_SET_MWS_TRANSPORT_LAYER_RESPONSE_PARAM_SIZE);	
 	/*wait for command complete event */
 	get_Bt_Response(hci_response);
 	
@@ -128,7 +156,16 @@ void init_Bt_Controller(){
     set_Simple_Pairing();
 }
 
-/* Returns zero (0) if successful, non-zero if not */
+/* Function Description:
+ /**
+ * @brief   This function handles organizing the byte-wise incoming BT data
+ *          on the USART and turn it into the BT events and codes that are 
+ *          used in the 4-wire HCI communication protocol.
+ *
+ * @param   A memory-allocated HCI_Event_Data_t struct to store the results 
+ *          of any BT responses that are currently in the btRxQueue.
+ * @retval  Returns zero (0) if successful, non-zero if not
+ */
 uint8_t get_Bt_Response(HCI_Event_Data_t *hci_response_struct){
 	uint8_t response_byte;
 	uint8_t response_value; /* next octet received from BT_controller */
@@ -159,7 +196,16 @@ uint8_t get_Bt_Response(HCI_Event_Data_t *hci_response_struct){
     return 0;
 }
 
-/* Returns Zero (0) if successful, nonzero if not */ 
+/* Function Description:
+ /**
+ * @brief   This function handles breaking down Bluetooth commands into their
+ *          base byte-wise orginization and adding them to the queue to be sent
+ *          when possible.
+ *
+ * @param   A configured BT HCI command that follows the structuring the
+ *          bt 4.0 protocol.
+ * @retval  Returns zero (0) if successful, non-zero if not
+ */
 uint8_t enqueue_Bt_Command(void *bt_command){
 	uint8_t i;
 	uint8_t *command = (uint8_t *)bt_command;
@@ -184,6 +230,16 @@ uint8_t enqueue_Bt_Command(void *bt_command){
 	}
 	return i;
 }
+
+/* Function Description:
+ /**
+ * @brief   This function builds a HCI_Write_Scan_Enable_Command_t structure to tell
+ *          the offboard controller to enable scanning for potential connections. This
+ *          command has no parameters.
+ *
+ * @param   none
+ * @retval  Returns zero (0) if successful, non-zero if not
+ */
 uint8_t set_Bt_Scan_Enable(){
     uint8_t error;
     HCI_Write_Scan_Enable_Command_t *set_scan_command = malloc(HCI_WRITE_SCAN_ENABLE_COMMAND_SIZE);
@@ -200,6 +256,16 @@ uint8_t set_Bt_Scan_Enable(){
     return 1;
     
 }
+
+/* Function Description:
+/**
+ * @brief   This function builds a HCI_Write_Simple_Pairing_Mode_Command_t structure for 
+ *          enabling the Bluetooth Simple Secure Pairing mode in the controller. No 
+ *          parameters for this HCI command are possible.
+ *
+ * @param   none
+ * @retval  Returns zero (0) if successful, non-zero if not
+ */
 uint8_t set_Simple_Pairing(){
     uint8_t error;
     HCI_Write_Simple_Pairing_Mode_Command_t *set_pairing_mode = malloc(HCI_WRITE_SIMPLE_PAIRING_MODE_COMMAND_SIZE);
@@ -217,6 +283,14 @@ uint8_t set_Simple_Pairing(){
     return 1;
 }
 
+/* Function Description:
+ /**
+ * @brief   This function is incomplete. It will be used to handle the various minor command
+ *          necessary to generate a connection with another bluetooth controller.
+ *
+ * @param   none
+ * @retval  none
+ */
 void connect_Bluetooth(){
     
     /* Process:
@@ -232,6 +306,14 @@ void connect_Bluetooth(){
     
 }
 
+/* Function Description:
+ /**
+ * @brief   This function builds a HCI_Inquiry_Command_t structure to generate
+ *          a bluetooth inquiry.
+ *
+ * @param   an HCI_Event_Data_t struct to place the controller response in.
+ * @retval  Returns zero (0) if successful, non-zero if not
+ */
 void start_Bt_Inquiry(HCI_Event_Data_t *event_response){
 	uint8_t error;
 	HCI_Inquiry_Command_t *start_inquiry = malloc(HCI_INQUIRY_COMMAND_SIZE);
@@ -256,6 +338,17 @@ void start_Bt_Inquiry(HCI_Event_Data_t *event_response){
 /* Here is where we get to fix all of TI's mistakes by 
  * loading their service pack. Woo.
 */
+/* Function Description:
+ /**
+ * @brief   Here is where we get to fix all of TI's mistakes by
+ *          loading their service pack. Woo. This function
+ *          uses the ti_stupd_sp.h file to patch the controller
+ *          firmware upon startup. This is a necessary precursor to
+ *          enabling the BT controller. 
+ *
+ * @param   none
+ * @retval  none
+ */
 void fix_TIs_Stupid_Mistakes(void){
 	uint32_t current_mistake;
 	uint32_t num_bytes_needed_to_fix_ti_mistakes = sizeof(BasePatch);
