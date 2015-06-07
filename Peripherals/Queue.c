@@ -1,5 +1,4 @@
 
-#include <stdint.h>
 #include <stdlib.h>
 #include "Queue.h"
 
@@ -50,16 +49,17 @@ int16_t deQueue(Queue *dataQueue){
 	
 	
 }
+/* Returns zero (0) if not empty and non-zero if empty */
 uint16_t queue_isEmpty(Queue *dataQueue){
 	// if tail = head, queue is empty
 	// postive -> is empty
 	// zero -> not empty
-	if(dataQueue->headPtr ^ dataQueue->tailPtr){
-		return 0;
-	}else{
-		return 1;
+	if(dataQueue->currentSize){
+		return (uint16_t) 0;
 	}
+	return (uint16_t) 1;
 }
+	
 // Return non-zero if the queue is full, 0 if its empty
 uint16_t queue_isFull(Queue *dataQueue){
 		if(dataQueue->tailPtr == dataQueue->length - 1){

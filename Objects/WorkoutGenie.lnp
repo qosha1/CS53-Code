@@ -1,6 +1,5 @@
 --cpu Cortex-M4.fp
 ".\objects\main.o"
-".\objects\cap_buttons.o"
 ".\objects\display.o"
 ".\objects\i2c_control.o"
 ".\objects\queue.o"

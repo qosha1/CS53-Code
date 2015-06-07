@@ -89,6 +89,15 @@ typedef struct {
     uint16_t compass_z;
 } mpu_data_s;
 
+typedef enum 
+{
+	NEWEST_DATA_PACKET,
+	EARLIEST_DATA_PACKET
+} data_packet_time;
+
+
+#define MS_PER_SAMPLE				((uint16_t) 100)// Number of milliseconds per data sample
+#define MINIMUM_DATA_TRANSFER (0x100)			// Set point at which to read data
 #define DATA_INVALID				(0x8000)
 
 #define STARTUP_LPF				  (0x00)					// least filtering
@@ -97,9 +106,11 @@ typedef struct {
 #define STARTUP_GYROCFG			(0x00)					// use all gyros at small range
 #define STARTUP_ACCELCFG		(0x00)					// use all accels at small range
 #define STARTUP_INTENABLE		BIT_DATA_RDY_EN | BIT_FIFO_OVERFLOW	// interrupt on daty ready
-#define STARTUP_INTPINCFG		(0x80)					// active low interrupt and wait till cleared
-#define STARTUP_RATE_DIV		(0X07)					// sample rate divider for gyro & accel at 1khx
+#define STARTUP_INTPINCFG		BIT_INT_LEVEL|BIT_LATCH_EN	// active low interrupt and wait till cleared
+#define STARTUP_RATE_DIV		(0x07)					// sample rate divider for gyro & accel at 1khx
+#define STARTUP_INTNENABLE	(0x00)					// Dont turn on interrupts
 
+#define MPU_WAKE_UP					(0x00)
 #define BIT_I2C_MST_VDDIO   (0x80)
 #define BIT_I2C_MASTER_EN		(0x20)
 #define BIT_FIFO_EN         (0x40)
@@ -130,6 +141,7 @@ typedef struct {
 #define BIT_AUX_IF_EN       (0x20)
 #define BIT_ACTL            (0x80)
 #define BIT_LATCH_EN        (0x20)
+#define BIT_INT_LEVEL				(0x80)
 #define BIT_ANY_RD_CLR      (0x10)
 #define BIT_BYPASS_EN       (0x02)
 #define BITS_WOM_EN         (0xC0)
@@ -154,17 +166,24 @@ typedef enum  /* FSR values for accelerometer settings */
 	PLUS_MINUS_SIXTEEN	= 0x18
 }accelRange;
 	
+extern volatile boolean new_mpu_data;
 extern volatile uint32_t msTicks;
 extern struct gyro_reg_s *mpu_regs;
 extern const struct gyro_reg_s reg;
 extern const struct hw_s hw;
 
+void display_New_Data();
 void display_Register(uint16_t reg, uint16_t value);
+void display_Motion_Data(mpu_data_s *data);
+
 void mpu_init(void);
 void configure_Mpu(mpu_setup_s *config);
-mpu_data_s * get_Data_Packet();
+void stop_Measuring();
+void start_Measuring();
+uint8_t get_Data_Packet(mpu_data_s *data, data_packet_time packet);
 boolean data_Packet_Ready();
 void Delay(uint32_t dlyTicks);
+extern void TIM15_IRQHandler(void);
 extern void EXTI9_5_IRQHandler(void);
 
 #endif // MPU_REGISTERS_H

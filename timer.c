@@ -17,7 +17,7 @@ void init_Timer(uint16_t ms_counts){
 	uint16_t prescale  = (SystemCoreClock / 1000); /* prescale to ms */
 	uint16_t timerCount = ms_counts;		/* Set the countdown */
 	RCC->APB2ENR |= RCC_APB2ENR_TIM15EN; /* turn on timer clock */
-	
+	NVIC_SetPriority (TIM15_IRQn, 0x06); /* Set lower interrupt priority */
 	TIM15->ARR = timerCount;
 	TIM15->PSC = prescale;
 	TIM15->SMCR |= TIM_SMCR_TS_1; /* Turn on timer */
@@ -41,9 +41,4 @@ void stop_Timer(){
 	// to avoid stopping mid-measurement
 	disableTimerFlag = 1;
 	timer_Active = 0;
-}
-
-void TIM15_IRQHandler(void) {
-		finished_Flag = true;
-		TIM15->SR &=  ~(TIM_SR_UIF |TIM_SR_CC2IF | TIM_SR_CC1IF); // reset status register
 }

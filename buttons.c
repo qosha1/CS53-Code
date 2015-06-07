@@ -74,7 +74,7 @@ uint8_t get_Button(){
 		button_presses |= get_Single_Button(buttons.button2);
 		button_presses |= get_Single_Button(buttons.button3);
 		button_presses |= get_Single_Button(buttons.button4);
-		if(button_presses != last_button && button_presses){
+		if((button_presses != last_button) && button_presses){
 			last_button = button_presses;
 			
 			//start_Timer();

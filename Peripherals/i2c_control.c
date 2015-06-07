@@ -146,7 +146,7 @@ void mpu_readRegister(uint16_t numBytes, uint16_t reg){
 	uint32_t interrupt =  MPU_I2C->ISR;
 	uint32_t tmpReg;	
 	
-while(MPU_I2C->ISR & I2C_ISR_BUSY){}// wait for any previous transfer to complete
+	while(MPU_I2C->ISR & I2C_ISR_BUSY){}// wait for any previous transfer to complete
 		
 	if(interrupt & I2C_ISR_STOPF){
 		MPU_I2C->ICR |= I2C_ICR_STOPCF; //clear flags
@@ -208,21 +208,24 @@ void I2C1_EV_IRQHandler(void){
 	if(interrupt & I2C_ISR_STOPF){
 		MPU_I2C->ICR |= I2C_ICR_STOPCF; //clear flag
 	}
-	if(!(MPU_I2C->CR2 & I2C_CR2_RD_WRN)){ /* either read OR write */
+	//if(!(MPU_I2C->CR2 & I2C_CR2_RD_WRN)){ /* either read OR write */
             /* Writing */
-            if(interrupt & I2C_ISR_TC){// transfer complete
-		//I2C2->CR2 |= I2C_CR2_STOP; // stop the I2c 
-            }else if(interrupt & I2C_ISR_TXE){
-                    // TX empty, send next byte
-                    MPU_I2C->TXDR = (uint8_t) deQueue(mpuTxQueue);
-            }
-	}else{
-            /* Reading */
-		if(interrupt & I2C_ISR_RXNE){
+	if(interrupt & I2C_ISR_RXNE){
 			// RX is not empty, read it before next incoming
 			enQueue(mpuRxQueue, MPU_I2C->RXDR);
-		}
-	}
+	} else if(interrupt & I2C_ISR_TXIS){
+		// TX empty, send next byte
+		MPU_I2C->TXDR = (uint8_t) deQueue(mpuTxQueue);
+	} else if(interrupt & I2C_ISR_TC){// transfer complete
+		//I2C2->CR2 |= I2C_CR2_STOP; // stop the I2c 
+  } 
+	//}else{
+            /* Reading */
+		//if(interrupt & I2C_ISR_RXNE){
+			// RX is not empty, read it before next incoming
+			//enQueue(mpuRxQueue, MPU_I2C->RXDR);
+		//}
+	//}
 }
 
 void SysTick_Handler (void) {

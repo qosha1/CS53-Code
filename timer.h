@@ -13,6 +13,5 @@ extern boolean finished_Flag;
 void init_Timer(uint16_t measure_Time);
 void start_Timer(void);
 void stop_Timer(void);
-extern void TIM15_IRQHandler(void);
 
 #endif //_timer_

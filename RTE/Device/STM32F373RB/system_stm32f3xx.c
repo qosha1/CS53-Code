@@ -177,6 +177,9 @@ void SystemInit(void)
   /* Set HSION bit */
   RCC->CR |= (uint32_t)0x00000001;
 
+	/* Disable all interrupts */
+  RCC->CIR = 0x00000000;
+	
   /* Reset CFGR register */
   RCC->CFGR &= 0xF87FC00C;
 
@@ -195,8 +198,6 @@ void SystemInit(void)
   /* Reset USARTSW[1:0], I2CSW and TIMs bits */
   RCC->CFGR3 &= (uint32_t)0xFF00FCCC;
 
-  /* Disable all interrupts */
-  RCC->CIR = 0x00000000;
 
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */

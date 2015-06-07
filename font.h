@@ -3,7 +3,7 @@
 #define FONT_WIDTH								8
 #define FONT_HEIGHT								8
 #define NUMBER_OFFSET							16
-#define OFFSET_FROM_ASCII					0x20
+#define OFFSET_FROM_ASCII					((uint8_t) 0x20)
 #define NUMBER_OF_CHARACTERS			98
 
 static const uint8_t FONT_BITMAP[98][8] = { 

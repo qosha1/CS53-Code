@@ -9,6 +9,9 @@ typedef enum
 	false = 0
 	}boolean;
 
+#define __INLINE         __inline                                   /*!< inline keyword for ARM Compiler       */
+#define __STATIC_INLINE  static __inline
+
 				/* GPIO pin definitions */ 
 
 // PA BLOCK
@@ -24,6 +27,8 @@ typedef enum
 	BT_HCI_RTS  = 11,
 	BT_HCI_CTS  = 12
 }PA_Block;
+
+#define NUM_CAP_BUTTONS			4		
 
 // PB Block
 typedef enum
@@ -62,8 +67,6 @@ typedef enum
 	
 #define BT_USART 		USART1
 
-
-#define MS_PER_SAMPLE			1000
 
 
 

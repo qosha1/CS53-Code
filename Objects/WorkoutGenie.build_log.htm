@@ -22,27 +22,47 @@ Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
 C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\WorkoutGenie.uvprojx
-Project File Date:  06/04/2015
+Project File Date:  06/06/2015
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling buttons.c...
-buttons.h(16): warning:  #1295-D: Deprecated declaration buttons_Init - give arg types
-  void buttons_Init();
-buttons.h(17): warning:  #1-D: last line of file ends without a newline
-  uint8_t get_Button();
-buttons.h(17): warning:  #1295-D: Deprecated declaration get_Button - give arg types
-  uint8_t get_Button();
-C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../timer.h(18): warning:  #1-D: last line of file ends without a newline
-  #endif //_timer_
-buttons.c(29): warning:  #1295-D: Deprecated declaration set_Threshold_Value - give arg types
-  void set_Threshold_Value();
-buttons.c(183): warning:  #1-D: last line of file ends without a newline
-  }
-buttons.c: 6 warnings, 0 errors
+compiling Display.c...
+Peripherals\Display.h(90): warning:  #1295-D: Deprecated declaration display_Shutdown - give arg types
+  void display_Shutdown();
+Peripherals\Display.h(91): warning:  #1295-D: Deprecated declaration display_Startup - give arg types
+  void display_Startup();
+Peripherals\Display.h(98): warning:  #1-D: last line of file ends without a newline
+  #endif //_display
+Peripherals\../font.h(108): warning:  #1-D: last line of file ends without a newline
+    };
+Peripherals\i2c_control.h(53): warning:  #1295-D: Deprecated declaration mpu_isInitialized - give arg types
+  boolean mpu_isInitialized();
+Peripherals\i2c_control.h(57): warning:  #1-D: last line of file ends without a newline
+  #endif        /* i2c_initialize */
+Peripherals\../mpu_control.h(175): warning:  #1295-D: Deprecated declaration display_New_Data - give arg types
+  void display_New_Data();
+Peripherals\../mpu_control.h(181): warning:  #1295-D: Deprecated declaration stop_Measuring - give arg types
+  void stop_Measuring();
+Peripherals\../mpu_control.h(182): warning:  #1295-D: Deprecated declaration start_Measuring - give arg types
+  void start_Measuring();
+Peripherals\../mpu_control.h(184): warning:  #1295-D: Deprecated declaration data_Packet_Ready - give arg types
+  boolean data_Packet_Ready();
+Peripherals\../mpu_control.h(189): warning:  #1-D: last line of file ends without a newline
+  #endif // MPU_REGISTERS_H
+Peripherals\Display.c(20): warning:  #177-D: variable "delay" was declared but never referenced
+        uint32_t delay;
+Peripherals\Display.c(206): warning:  #177-D: variable "delay" was declared but never referenced
+        uint32_t delay;
+Peripherals\Display.c(222): warning:  #177-D: variable "delay" was declared but never referenced
+        uint32_t delay = 500000;
+Peripherals\Display.c(264): warning:  #177-D: variable "j" was declared but never referenced
+        int i, j, pages_to_read;
+Peripherals\Display.c(264): warning:  #177-D: variable "pages_to_read" was declared but never referenced
+        int i, j, pages_to_read;
+Peripherals\Display.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=6724 RO-data=1284 RW-data=72 ZI-data=3552  
-".\Objects\WorkoutGenie.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=6738 RO-data=1282 RW-data=84 ZI-data=3556  
+".\Objects\WorkoutGenie.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 

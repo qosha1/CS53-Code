@@ -13,3 +13,4 @@
 .\objects\mpu_control.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmSimd.h
 .\objects\mpu_control.o: C:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\1.3.0\Device\Include\system_stm32f3xx.h
 .\objects\mpu_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../Peripherals/Queue.h
+.\objects\mpu_control.o: C:\Users\Quinn\Documents\EECS53\Project\CS53-Code\RTE\../timer.h

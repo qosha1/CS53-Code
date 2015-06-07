@@ -9,3 +9,4 @@
 .\objects\cap_buttons.o: Peripherals\Cap_Buttons.h
 .\objects\cap_buttons.o: Peripherals\Display.h
 .\objects\cap_buttons.o: Peripherals\Queue.h
+.\objects\cap_buttons.o: Peripherals\../Main/mpu_constants.h

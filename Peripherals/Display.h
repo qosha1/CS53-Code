@@ -1,6 +1,11 @@
+
+#ifndef _display_
+#define _display_
+
 #include <stdint.h>
 #include "stm32f373xc.h"                  // Device header
 #include "Queue.h"
+#include "../Main/mpu_constants.h"
 
 #define I2C_TIMING_PRESC			((uint32_t)0x00000001)
 #define I2C_TIMING_SCLDEL			((uint32_t)0x00000004)
@@ -17,6 +22,16 @@
 #define DISPLAY_DATA_ADDRESS 	((uint32_t)0x0000007A)
 #define DISPLAY_WIDTH					0x0040
 #define DISPLAY_HEIGHT				0x0006
+
+/* Implementation specific data locations on display */
+#define ACCELX_DISPLAY_PAGE		0
+#define ACCELY_DISPLAY_PAGE		1
+#define ACCELZ_DISPLAY_PAGE		2
+#define GYROX_DISPLAY_PAGE		3
+#define GYROY_DISPLAY_PAGE		4
+#define GYROZ_DISPLAY_PAGE		5
+#define MOTION_DATA_COLSTART	18
+#define DATA_LABELS_COLSTART	0
 
 /* Display command codes */
 #define DISPLAY_ON 						((uint8_t)0xAF)
@@ -67,11 +82,17 @@
 #define DISPLAY_COLADD_START	((uint8_t)0x20)
 #define DISPLAY_COLADD_END		((uint8_t)0x5F)
 #define DISPLAY_PAGEADD_START	((uint8_t)0x00)
-#define DISPLAY_PAGEADD_END		((uint8_t)0x06)
+#define DISPLAY_PAGEADD_END		((uint8_t)0x05)
 
 extern Queue *displayQueue;
 void display_Communicate(uint16_t numBytes, uint16_t readWrite, uint16_t dataCommand);
 void display_Init(void);
-void display_Int(uint16_t value);
+void display_Shutdown();
+void display_Startup();
+void display_Int(uint16_t value, uint8_t display_page, 
+									uint8_t x_offset, boolean display_now);
+void display_String(char *string, uint8_t display_page, 
+									uint8_t x_offset, boolean display_now);
 extern void I2C2_EV_IRQHandler(void);
 
+#endif //_display
